@@ -1,0 +1,61 @@
+<div class="sidebar" [class.collapsed]="isCollapsed">
+    <button (click)="toggleMenu()" class="toggle-btn">
+      <fa-icon [icon]="faBars"></fa-icon>
+      <span *ngIf="!isCollapsed">Leonísia</span>
+    </button>
+
+
+    
+    <ul>
+      <!-- Dashboard -->
+      <li>
+        <a href="#">
+          <fa-icon [icon]="faHome"></fa-icon> 
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </a>
+      </li>
+
+
+      
+      <!--  item - Transações -->
+      <li>
+        <a href="#">
+          <fa-icon [icon]="faRepeat"></fa-icon> 
+          <span *ngIf="!isCollapsed">Transações</span>
+        </a>
+      </li>
+
+      <!-- item - Relatórios -->
+      <li>
+        <a href="#">
+          <fa-icon [icon]="faReceipt"></fa-icon> 
+          <span *ngIf="!isCollapsed">Relatórios</span>
+        </a>
+      </li>
+
+      <!--  item - Relatórios -->
+      <li>
+        <a href="#">
+          <fa-icon [icon]="faShop"></fa-icon> 
+          <span *ngIf="!isCollapsed">Relatórios</span>
+        </a>
+      </li>
+
+      <!--  item - Realizar serviço -->
+      <li>
+        <a href="#">
+          <fa-icon [icon]="faCut"></fa-icon> 
+          <span *ngIf="!isCollapsed">Realizar serviço</span>
+        </a>
+      </li>
+
+      <li>
+        <a href="#">
+          <fa-icon [icon]="faCog"></fa-icon> 
+          <span *ngIf="!isCollapsed">Configurações</span>
+        </a>
+      </li>
+
+    </ul>
+  </div>
+  
