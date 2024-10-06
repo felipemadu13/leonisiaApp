@@ -1,1 +1,23 @@
-<app-siderbar-menu></app-siderbar-menu>
+<link href="https://fonts.googleapis.com/css2?family=Dongle:wght@300;400;700&display=swap" rel="stylesheet">
+
+
+<div class="container">
+    <div class="saldo-geral">
+        <h2 class="sg">Saldo Geral</h2>
+        <h2 class="valor">$6.589,57</h2>
+       
+    </div>
+    <div class="entrada">
+        <h2 class="ent">Entrada</h2>
+        <H2 class="diaria">Diaria</H2>
+        <h2 class="valor">$587</h2>
+    </div>
+    <div class="saida"></div>
+    <div class="balanço"></div>
+    <div class="vencimento-da-semana"></div>
+    <div class="serviços-realzados">
+        <h2 class="sr">Rerviços-Realzados</h2>
+        <div echarts [options]="pieChartOption" class="pie"></div>
+    </div>
+
+</div>

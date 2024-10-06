@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from "./pages/home/home/home.component";
+import { SiderbarMenuComponent } from "./pages/home/sidebar-menu/siderbar-menu/siderbar-menu.component";
+import { ResetPasswordComponent } from "./pages/reset-password/reset-password/reset-password.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent],
+  imports: [RouterOutlet, HomeComponent, SiderbarMenuComponent, ResetPasswordComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
