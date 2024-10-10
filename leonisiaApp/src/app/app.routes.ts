@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
+import { LoginscreenComponent } from './pages/loginscreen/loginscreen.component';
 
 export const routes: Routes = [
     {
-        path: '/leonisiaApp/src/app/pages/loginscreen/loginscreen.component.html'
+        path: 'login', component: LoginscreenComponent
     }
 ];
