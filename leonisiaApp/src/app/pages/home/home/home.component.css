@@ -8,189 +8,129 @@
 
 .screen {
     width: 100%;
-    height: 100dvh;
+    height: 100%;
     display: flex;
     flex-direction: row;
+    position: relative;
 }
 
 .container {
     width: 100%;
     height: 100dvh;
     background-color: rgb(88, 85, 85);
+    display: grid;
+    grid-template-columns: repeat(2, 2fr);
     /* Necessário para posicionamento absoluto dos filhos */
+    justify-items: center;
+    align-content: center;
+    gap: 20px;
+    background-color: #89a089;
 }
 
-/* Centralização do gráfico de barras */
-.saldo-geral {
+.saldo-geral,
+.rendimentos,
+.servi-realizados,
+.vencimentos {
     width: 550px;
-    height: 308px;
-    position: absolute;
-    top: 80px;
-    right: 570px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #657D65;
+    min-height: 300px;
+    background-color: #effeef;
     border-radius: 8px;
-    padding: 10px;
+    padding: 20px 1rem;
+}
+
+.saldo-geral,
+.servi-realizados,
+.vencimentos {
+    box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.25);
+
+}
+
+.rendimentos {
+    background-color: transparent;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    /* Para garantir que o conteúdo não extrapole */
+    gap: 20px;
 }
 
-.saldo-geral echarts {
-    position: absolute;
-    top: -5px;
-    left: 10px;
-    margin: 0;
-    font-size: 35px;
-    color: #273027;
-}
-
-.saldo-geral .sg {
-    position: absolute;
-    top: -5px;
-    left: 10px;
-    margin: 0;
-    font-size: 35px;
-    color: #273027;
-}
-
-.saldo-geral .valor {
-    position: absolute;
-    top: 25px;
-    left: 10px;
-    margin: 0;
-    font-size: 42px;
-    color: #273027;
-}
-
-/* Centralização do gráfico de pizza */
-.serviços-realzados {
-    width: 550px;
-    height: 308px;
-    position: absolute;
-    top: 460px;
-    right: 570px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #657D65;
-    border-radius: 8px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-}
-
-.serviços-realzados .pie {
+.saldo-data {
     width: 100%;
+    min-height: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.saldo-title {
+    font-size: 28px;
+}
+
+.saldo-value {
+    font-size: 36px;
+}
+
+.entrada-saida {
+    display: flex;
+    height: 50%;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.entrada,
+.saida {
+    width: 50%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #657D65;
+    box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.25);
+}
+
+.balanco {
+    height: 50%;
+    background-color: #effeef;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 15px 10px rgba(0, 0, 0, 0.25);
+}
+
+.entrada-header,
+.saida-header,
+.balanco-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.sr {
-    align-self: flex-start;
-    /* Alinha o título no início (esquerda) */
-    margin: 0;
-    /* Remove a margem padrão do h2 */
-    padding: 0 10px;
-    /* Adiciona algum espaçamento à esquerda e direita */
-    font-size: 25px;
-    /* Ajusta o tamanho da fonte */
-    color: white;
-    /* Cor do texto */
+.entrada-header:first-child,
+.saida-header:first-child,
+.balanco-header:first-child {
+    font-size: 28px;
 }
 
-/* Estilos para Entrada */
-.saida {
-    width: 231.99px;
-    height: 120px;
-    position: absolute;
-    /* Posicionamento absoluto */
-    top: 80px;
-    /* Margem de 40px do topo */
-    right: 30px;
-    /* Margem de 20px da direita */
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #657D65;
-    border-radius: 8px;
+.value {
+    font-size: 40px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
 }
 
-/* Estilos para Saída */
-.entrada {
-    width: 231.99px;
-    height: 120px;
-    position: absolute;
-    /* Posicionamento absoluto */
-    top: 80px;
-    /* Alinhado ao mesmo nível da entrada */
-    right: calc(20px + 231.99px + 50px);
-    /* Margem da direita + largura da entrada + espaçamento de 50px */
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #657D65;
-    border-radius: 8px;
+.select {
+    width: 30%;
+    outline: none;
+    border: none;
+    height: 80%;
+    background: transparent;
+    border: solid 1px #657D65;
+    font-size: 22px;
 }
 
-/* Estilos para "Entrada" (canto esquerdo superior) */
-.entrada .ent {
-    position: absolute;
-    top: -5px;
-    left: 10px;
-    margin: 0;
-    font-size: 48px;
-    color: #273027;
-}
-
-/* Estilos para "Diaria" (canto direito superior) */
-.entrada .diaria {
-    position: absolute;
-    top: 8px;
-    right: 35px;
-    margin: 0;
-    font-size: 32px;
-    color: white;
-}
-
-/* Estilos para o "valor" (canto inferior centralizado) */
-.entrada .valor {
-    position: absolute;
-    bottom: -25px;
-    left: 25%;
-    transform: translateX(-50%);
-    /* Centraliza horizontalmente */
-    margin: 0;
-    font-size: 75px;
-    color: white;
-}
-
-/* Estilos para Balanço */
-.balanço {
-    width: 505px;
-    height: 160px;
-    position: absolute;
-    /* Posicionamento absoluto */
-    top: 225px;
-    /* Alinhado ao mesmo nível da entrada */
-    right: 30px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #657D65;
-    border-radius: 8px;
-}
-
-/* Estilos para Vencimento da Semana */
-.vencimento-da-semana {
-    width: 470px;
-    height: 280px;
-    position: absolute;
-    /* Posicionamento absoluto */
-    top: 475px;
-    /* Alinhado ao mesmo nível da entrada */
-    right: 45px;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    background: #657D65;
-    border-radius: 8px;
+.select option {
+    font-size: 18px;
 }
