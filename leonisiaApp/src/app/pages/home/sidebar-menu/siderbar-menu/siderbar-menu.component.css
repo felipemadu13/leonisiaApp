@@ -10,6 +10,13 @@
     box-sizing: border-box;
     transition: width 0.3s ease; /* Animação ao colapsar/expandir */
   }
+
+  .logo {
+    width: 100%;
+    height: 100%;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
   
  
   .sidebar ul {
