@@ -6,12 +6,17 @@
     box-sizing: border-box;
 }
 
+.screen {
+    width: 100%;
+    height: 100dvh;
+    display: flex;
+    flex-direction: row;
+}
 
-.contener {
-    width: calc(100dvh -290dvh);
+.container {
+    width: 100%;
     height: 100dvh;
     background-color: rgb(88, 85, 85);
-    position: relative;
     /* Necessário para posicionamento absoluto dos filhos */
 }
 
