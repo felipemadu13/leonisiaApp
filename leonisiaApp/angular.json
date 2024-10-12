@@ -23,7 +23,8 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public",
+                "output": "logo"
               }
             ],
             "styles": [
@@ -80,8 +81,14 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               {
+                "glob": "**/*",
+                "input": "public",
+                "output": "/"
+              },
+              {
                 "glob": "**/src*",
-                "input": "public"
+                "input": "src/assets/img",
+                "output": "/assets/img"
               }
             ],
             "styles": [

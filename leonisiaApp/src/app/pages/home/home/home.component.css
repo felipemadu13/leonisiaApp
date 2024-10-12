@@ -8,14 +8,16 @@
 
 
 .contener {
-    width: 100dvh;
+    width: calc(100dvh -290dvh);
     height: 100dvh;
     background-color: rgb(88, 85, 85);
-    position: relative; /* Necessário para posicionamento absoluto dos filhos */
+    position: relative;
+    /* Necessário para posicionamento absoluto dos filhos */
 }
+
 /* Centralização do gráfico de barras */
 .saldo-geral {
-    width: 550px; 
+    width: 550px;
     height: 308px;
     position: absolute;
     top: 80px;
@@ -28,7 +30,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow: hidden; /* Para garantir que o conteúdo não extrapole */
+    overflow: hidden;
+    /* Para garantir que o conteúdo não extrapole */
 }
 
 .saldo-geral echarts {
@@ -39,6 +42,7 @@
     font-size: 35px;
     color: #273027;
 }
+
 .saldo-geral .sg {
     position: absolute;
     top: -5px;
@@ -48,7 +52,7 @@
     color: #273027;
 }
 
-.saldo-geral .valor{
+.saldo-geral .valor {
     position: absolute;
     top: 25px;
     left: 10px;
@@ -59,7 +63,7 @@
 
 /* Centralização do gráfico de pizza */
 .serviços-realzados {
-    width: 550px; 
+    width: 550px;
     height: 308px;
     position: absolute;
     top: 460px;
@@ -83,20 +87,29 @@
     align-items: center;
 }
 
-.sr{
-    align-self: flex-start; /* Alinha o título no início (esquerda) */
-    margin: 0; /* Remove a margem padrão do h2 */
-    padding: 0 10px; /* Adiciona algum espaçamento à esquerda e direita */
-    font-size: 25px; /* Ajusta o tamanho da fonte */
-    color: white; /* Cor do texto */
+.sr {
+    align-self: flex-start;
+    /* Alinha o título no início (esquerda) */
+    margin: 0;
+    /* Remove a margem padrão do h2 */
+    padding: 0 10px;
+    /* Adiciona algum espaçamento à esquerda e direita */
+    font-size: 25px;
+    /* Ajusta o tamanho da fonte */
+    color: white;
+    /* Cor do texto */
 }
+
 /* Estilos para Entrada */
 .saida {
     width: 231.99px;
     height: 120px;
-    position: absolute; /* Posicionamento absoluto */
-    top: 80px; /* Margem de 40px do topo */
-    right: 30px; /* Margem de 20px da direita */
+    position: absolute;
+    /* Posicionamento absoluto */
+    top: 80px;
+    /* Margem de 40px do topo */
+    right: 30px;
+    /* Margem de 20px da direita */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: #657D65;
     border-radius: 8px;
@@ -106,13 +119,17 @@
 .entrada {
     width: 231.99px;
     height: 120px;
-    position: absolute; /* Posicionamento absoluto */
-    top: 80px; /* Alinhado ao mesmo nível da entrada */
-    right: calc(20px + 231.99px + 50px); /* Margem da direita + largura da entrada + espaçamento de 50px */
+    position: absolute;
+    /* Posicionamento absoluto */
+    top: 80px;
+    /* Alinhado ao mesmo nível da entrada */
+    right: calc(20px + 231.99px + 50px);
+    /* Margem da direita + largura da entrada + espaçamento de 50px */
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: #657D65;
     border-radius: 8px;
 }
+
 /* Estilos para "Entrada" (canto esquerdo superior) */
 .entrada .ent {
     position: absolute;
@@ -138,7 +155,8 @@
     position: absolute;
     bottom: -25px;
     left: 25%;
-    transform: translateX(-50%); /* Centraliza horizontalmente */
+    transform: translateX(-50%);
+    /* Centraliza horizontalmente */
     margin: 0;
     font-size: 75px;
     color: white;
@@ -148,8 +166,10 @@
 .balanço {
     width: 505px;
     height: 160px;
-    position: absolute; /* Posicionamento absoluto */
-    top: 225px; /* Alinhado ao mesmo nível da entrada */
+    position: absolute;
+    /* Posicionamento absoluto */
+    top: 225px;
+    /* Alinhado ao mesmo nível da entrada */
     right: 30px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: #657D65;
@@ -160,8 +180,10 @@
 .vencimento-da-semana {
     width: 470px;
     height: 280px;
-    position: absolute; /* Posicionamento absoluto */
-    top: 475px; /* Alinhado ao mesmo nível da entrada */
+    position: absolute;
+    /* Posicionamento absoluto */
+    top: 475px;
+    /* Alinhado ao mesmo nível da entrada */
     right: 45px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     background: #657D65;
