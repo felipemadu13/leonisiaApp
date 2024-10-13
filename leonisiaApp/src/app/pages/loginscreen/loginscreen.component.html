@@ -11,10 +11,10 @@
             <span>Senha:</span>
             <input type="password" placeholder="Digite a senha">
         </div>
-        <button class="login-button">Entrar</button>
+        <button type="button" (click)="goToHome()" class="login-button">Entrar</button>
         <div class="links">
-            <a href="#">Esqueceu a senha?</a>
-            <a href="#">Não possui um usuário?</a>
+            <a href="/recuperar">Esqueceu a senha?</a>
+            <a href="/registrar">Não possui um usuário?</a>
         </div>
     </div>
 
