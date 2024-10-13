@@ -20,7 +20,6 @@
     background-color: rgb(88, 85, 85);
     display: grid;
     grid-template-columns: repeat(2, 2fr);
-    /* Necessário para posicionamento absoluto dos filhos */
     justify-items: center;
     align-content: center;
     gap: 20px;
