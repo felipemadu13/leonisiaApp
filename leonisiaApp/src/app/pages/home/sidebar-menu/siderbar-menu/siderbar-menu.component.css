@@ -1,75 +1,65 @@
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 29dvh; 
-    height: 100dvh;
-    background-color: #3f5840;
-    color: #fff;
-    padding: 20px;
-    box-sizing: border-box;
-    transition: width 0.3s ease; /* Animação ao colapsar/expandir */
-  }
+  width: 12vw;
+  height: 100dvh;
+  background-color: #3f5840;
+  color: #fff;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: width 0.3s ease;
+  /* Animação ao colapsar/expandir */
+}
 
-  .logo {
-    width: 100%;
-    height: 100%;
-    margin-left: 10px;
-    vertical-align: middle;
-  }
-  
- 
-  .sidebar ul {
-    list-style: none;
-    padding: 0; 
-    margin: 0; 
-  }
-  
-  .sidebar ul li {
-    margin: 25px 12px;
-    display: flex;
-    align-items: center; 
-  }
-  
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-  .sidebar  ul li fa-icon {
-    font-size: 20px; /* tamanho dos ícones  */
-  }
+.sidebar ul li {
+  margin: 25px 12px;
+  display: flex;
+  align-items: center;
+}
 
-  .sidebar ul li fa-icon {
-    margin-right: 5px; /* Espaçamento entre ícone e texto */
-  }
-  
- 
 
-  .sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-  }
-  
+.sidebar ul li fa-icon {
+  font-size: 20px;
+  /* tamanho dos ícones  */
+}
 
-  
-  .sidebar.collapsed {
-    width: 80px; /*largura quando colapsado */
-  }
-  
-  .sidebar.collapsed  ul li span {
-    display: none; 
-  }
-  
-  /* Botão de alternar menu */
-  button {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    margin-bottom: 20px;
-  }
+.sidebar ul li fa-icon {
+  margin-right: 5px;
+  /* Espaçamento entre ícone e texto */
+}
 
-  .sidebar button span {
-    margin-left: 10px;
-    font-size: 25px;
-  }
-  
-  
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+
+
+.sidebar.collapsed {
+  width: 80px;
+  /*largura quando colapsado */
+}
+
+.sidebar.collapsed ul li span {
+  display: none;
+}
+
+/* Botão de alternar menu */
+button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.sidebar button span {
+  margin-left: 10px;
+  font-size: 25px;
+}
