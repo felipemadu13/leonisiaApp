@@ -7,12 +7,22 @@ import { LoginscreenComponent } from './pages/loginscreen/loginscreen.component'
 import { CadastroscreenComponent } from './pages/cadastroscreen/cadastroscreen.component';
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, SiderbarMenuComponent, ResetPasswordComponent, LoginscreenComponent, CadastroscreenComponent, CommonModule, FormsModule],
+  imports: [
+    RouterOutlet, 
+    HomeComponent, 
+    SiderbarMenuComponent, 
+    ResetPasswordComponent, 
+    LoginscreenComponent, 
+    CadastroscreenComponent, 
+    CommonModule, 
+    FormsModule
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
