@@ -8,15 +8,13 @@ import { CadastroscreenComponent } from './pages/cadastroscreen/cadastroscreen.c
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HomeComponent, SiderbarMenuComponent, ResetPasswordComponent, LoginscreenComponent, CadastroscreenComponent, CommonModule, FormsModule],
+  imports: [RouterOutlet, CommonModule, FormsModule],  // Certifique-se de importar o FormsModule
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
-
 export class AppComponent {
   title = 'leonisiaApp';
 }
