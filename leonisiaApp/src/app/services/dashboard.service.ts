@@ -16,4 +16,8 @@ export class DashboardService {
     return this.http.get<Dashboard>(this.apiUrl);
   }
 
+  // getChartData(): Observable<any> {
+  //   return this.http.get<any>(`${this.apiUrl}/chartdata`);
+  // }
+
 }

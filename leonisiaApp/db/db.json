@@ -6,6 +6,15 @@
     "saidaDiario": 290.99,
     "saidaMensal": 450.98,
     "balancoDiario": 300.00,
-    "balancoMensal": 731.00 
+    "balancoMensal": 731.00,
+    "chartData": {
+      "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      "datasets": [
+        {
+          "data": [65, 59, 80, 81, 56, 55],
+          "label": "Balanço"
+        }
+      ]
+    }
   }
 }

@@ -6,6 +6,15 @@
                 <span class="saldo-title">Saldo Geral</span>
                 <span class="saldo-value">R$ {{ dashboard.saldoGeral }}</span>
             </div>
+
+
+  <canvas
+    baseChart
+    [data]="dashboard.chartData"
+    [options]="barChartOptions"
+  >
+  </canvas>
+
         </div>
         <div class="rendimentos">
             <div class="entrada-saida">
