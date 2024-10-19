@@ -32,20 +32,32 @@ export class HomeComponent {
   @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
 
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    scales: {
-      x: {},
-      y: { min: 10 },
+  scales: {
+    x: {},
+    y: {
+      min: 10,
+      ticks: {
+        callback: (value: any) => {
+          const currencyPipe = new CurrencyPipe('pt-BR');
+          return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
+        }
+      }
+    }
+  },
+  plugins: {
+    legend: {
+      display: true,
     },
-    plugins: {
-      legend: {
-        display: true,
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      },
+    datalabels: {
+      anchor: 'end',
+      align: 'end',
+      formatter: (value: any) => {
+        const currencyPipe = new CurrencyPipe('pt-BR');
+        return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
+      }
     },
-  };
+  },
+};
 
   
 
@@ -78,16 +90,14 @@ export class HomeComponent {
 
   constructor(private dashboardService: DashboardService) {}
 
-  ngOnInit(): void {
-    this.dashboardService.getDashboard().subscribe(data => {
-      this.dashboard = data;
-      
-      // Atualizar os dados do gráfico
-      this.barChartData.labels = data.chartData.labels;
-      this.barChartData.datasets = data.chartData.datasets;
-      
-      // Atualizar o gráfico
-      this.chart?.update();
-    });
-  }
+ngOnInit(): void {
+  this.dashboardService.getDashboard().subscribe(data => {
+    this.dashboard = data;
+
+    this.barChartData.labels = data.chartData.labels;
+    this.barChartData.datasets = data.chartData.datasets;
+
+    this.chart?.update();
+  });
+}
 }
