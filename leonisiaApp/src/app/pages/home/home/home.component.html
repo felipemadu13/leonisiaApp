@@ -4,8 +4,17 @@
         <div class="saldo-geral">
             <div class="saldo-data">
                 <span class="saldo-title">Saldo Geral</span>
-                <span class="saldo-value">R$ {{ dashboard.saldoGeral }}</span>
+                <span class="saldo-value">{{ dashboard.saldoGeral | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
             </div>
+
+
+  <canvas
+    baseChart
+    [data]="dashboard.BarChartData"
+    [options]="barChartOptions"
+  >
+  </canvas>
+
         </div>
         <div class="rendimentos">
             <div class="entrada-saida">
@@ -18,8 +27,8 @@
                         </select>
                     </div>
                     <div class="value">
-                         <span *ngIf="entrada === 'diario'">R$ {{ dashboard.entradaDiario }}</span>
-                        <span *ngIf="entrada === 'mensal'">R$ {{ dashboard.entradaMensal }}</span>
+                         <span *ngIf="entrada === 'diario'">{{ dashboard.entradaDiario | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+                        <span *ngIf="entrada === 'mensal'">{{ dashboard.entradaMensal | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
                     </div>
                 </div>
                 <div class="saida">
@@ -31,8 +40,8 @@
                         </select>
                     </div>
                     <div class="value">
-                        <span *ngIf="saida === 'diario'">R$ {{ dashboard.saidaDiario }}</span>
-                        <span *ngIf="saida === 'mensal'">R$ {{ dashboard.saidaMensal }}</span>
+                        <span *ngIf="saida === 'diario'">{{ dashboard.saidaDiario | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+                        <span *ngIf="saida === 'mensal'">{{ dashboard.saidaMensal | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
                     </div>
 
                 </div>
@@ -49,16 +58,25 @@
                 </div>
 
                 <div class="value">
-                        <span *ngIf="balanco === 'diario'">R$ {{ dashboard.balancoDiario }}</span>
-                        <span *ngIf="balanco === 'mensal'">R$ {{ dashboard.balancoMensal }}</span>
+                        <span *ngIf="balanco === 'diario'">{{ dashboard.balancoDiario | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+                        <span *ngIf="balanco === 'mensal'">{{ dashboard.balancoMensal | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
                 </div>
 
             </div>
 
         </div>
         <div class="servi-realizados">
+            <span>Serviços realizados</span>
+            <canvas
+                baseChart
+                [data]="pieChartData"
+                [type]="pieChartType"
+                [options]="pieChartOptions"
+            >
+            </canvas>
 
         </div>
+
         <div class="vencimentos">
 
         </div>
