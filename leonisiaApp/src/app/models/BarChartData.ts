@@ -1,4 +1,4 @@
-export interface ChartData {
+export interface BarChartData {
   labels: string[];   // Rótulos no eixo X
   datasets: {         // Conjunto de dados, pode haver mais de um dataset
     data: number[];   // Dados numéricos para o gráfico

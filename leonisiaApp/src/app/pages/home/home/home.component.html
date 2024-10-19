@@ -10,7 +10,7 @@
 
   <canvas
     baseChart
-    [data]="dashboard.chartData"
+    [data]="dashboard.BarChartData"
     [options]="barChartOptions"
   >
   </canvas>
@@ -66,8 +66,17 @@
 
         </div>
         <div class="servi-realizados">
+            <span>Serviços realizados</span>
+            <canvas
+                baseChart
+                [data]="pieChartData"
+                [type]="pieChartType"
+                [options]="pieChartOptions"
+            >
+            </canvas>
 
         </div>
+
         <div class="vencimentos">
 
         </div>

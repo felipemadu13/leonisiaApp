@@ -1,4 +1,5 @@
-import { ChartData } from './ChartData';
+import { BarChartData } from './BarChartData';
+import { PieChartData } from './PieChartData';
 
 export interface Dashboard {
   saldoGeral: number;
@@ -8,5 +9,6 @@ export interface Dashboard {
   saidaMensal: number;
   balancoDiario: number;
   balancoMensal: number;
-  chartData: ChartData;
+  BarChartData: BarChartData;
+  PieChartData: PieChartData;
 }

@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Chart, ChartConfiguration, ChartData, ChartOptions, ChartTypeRegistry } from 'chart.js';
+import { Chart, ChartConfiguration, ChartData, ChartOptions, ChartType, ChartTypeRegistry } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { SiderbarMenuComponent } from "../sidebar-menu/siderbar-menu/siderbar-menu.component";
@@ -31,6 +31,7 @@ export class HomeComponent {
   // Gráficos
   @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
 
+  // Gráfico de Barra
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
   scales: {
     x: {},
@@ -59,8 +60,6 @@ export class HomeComponent {
   },
 };
 
-  
-
   public barChartType: keyof ChartTypeRegistry = 'bar';
 
   public barChartData: ChartData<'bar'> = {
@@ -70,6 +69,34 @@ export class HomeComponent {
     ],
   };
 
+  // Gráfico de Pizza
+    public pieChartOptions: ChartConfiguration['options'] = {
+    plugins: {
+      legend: {
+        display: true,
+        position: 'top',
+      },
+      datalabels: {
+        formatter: (value, ctx) => {
+          if (ctx.chart.data.labels) {
+            return ctx.chart.data.labels[ctx.dataIndex];
+          }
+          return '';
+        },
+      },
+    },
+  };
+  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+    labels: [],
+    datasets: [
+      {
+        data: [],
+      },
+    ],
+  };
+  public pieChartType: ChartType = 'pie';
+
+
   dashboard: Dashboard = {
     saldoGeral: 0,
     entradaDiario: 0,
@@ -78,10 +105,14 @@ export class HomeComponent {
     saidaMensal: 0,
     balancoDiario: 0,
     balancoMensal: 0,
-    chartData: {
+    BarChartData: {
       labels: [],
       datasets: [{ data: [], label: '' }],
-    }
+    },
+    PieChartData: {
+      labels: [],
+      datasets: [{ data: [], label: '' }],
+    },
   };
 
   entrada: string = 'diario';
@@ -94,8 +125,11 @@ ngOnInit(): void {
   this.dashboardService.getDashboard().subscribe(data => {
     this.dashboard = data;
 
-    this.barChartData.labels = data.chartData.labels;
-    this.barChartData.datasets = data.chartData.datasets;
+    this.barChartData.labels = data.BarChartData.labels;
+    this.barChartData.datasets = data.BarChartData.datasets;
+
+    this.pieChartData.labels = data.PieChartData.labels;
+    this.pieChartData.datasets = data.PieChartData.datasets;
 
     this.chart?.update();
   });
