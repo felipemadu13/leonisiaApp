@@ -11,7 +11,7 @@
       "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
       "datasets": [
         {
-          "data": [65, 59, 80, 81, 56, 55],
+          "data": [65.50, 59, 80, 81, 56, 55],
           "label": "Balanço"
         }
       ]

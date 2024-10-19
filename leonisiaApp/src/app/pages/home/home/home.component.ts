@@ -3,20 +3,29 @@ import { Chart, ChartConfiguration, ChartData, ChartOptions, ChartTypeRegistry }
 import { BaseChartDirective } from 'ng2-charts';
 import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { SiderbarMenuComponent } from "../sidebar-menu/siderbar-menu/siderbar-menu.component";
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { DashboardService } from '../../../services/dashboard.service';
-import { Dashboard } from '../../../models/dashboard';
+import { Dashboard } from '../../../models/Dashboard';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt'; 
+import { LOCALE_ID } from '@angular/core';
+
+registerLocaleData(localePt); 
 
 Chart.register(DataLabelsPlugin);
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton],
+  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
+  providers: [
+    CurrencyPipe,
+    { provide: 'LOCALE_ID', useValue: 'pt-BR' },
+  ]
 })
 export class HomeComponent {
   // Gráficos
@@ -37,6 +46,8 @@ export class HomeComponent {
       },
     },
   };
+
+  
 
   public barChartType: keyof ChartTypeRegistry = 'bar';
 
