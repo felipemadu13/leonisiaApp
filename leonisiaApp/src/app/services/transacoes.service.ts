@@ -14,4 +14,9 @@ export class TransacoesService {
   getTransactions(): Observable<Transacoes[]> {
     return this.http.get<Transacoes[]>(this.apiUrl);
   }
+
+    // Método para adicionar uma nova transação
+  addTransaction(transacao: Transacoes): Observable<Transacoes> {
+    return this.http.post<Transacoes>(this.apiUrl, transacao);
+  }
 }

@@ -5,50 +5,99 @@
     "entradaMensal": 1181.98,
     "saidaDiario": 290.99,
     "saidaMensal": 450.98,
-    "balancoDiario": 300.00,
-    "balancoMensal": 731.00,
+    "balancoDiario": 300,
+    "balancoMensal": 731,
     "BarChartData": {
-      "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      "labels": [
+        "Jan",
+        "Fev",
+        "Mar",
+        "Abr",
+        "Mai",
+        "Jun"
+      ],
       "datasets": [
         {
-          "data": [65.50, 59, 80, 81, 56, 55],
+          "data": [
+            65.5,
+            59,
+            80,
+            81,
+            56,
+            55
+          ],
           "label": "Balanço"
         }
       ]
     },
     "PieChartData": {
-      "labels": ["Corte Masculino", "Corte Feminimo", "Escova", "Pintura"],
+      "labels": [
+        "Corte Masculino",
+        "Corte Feminimo",
+        "Escova",
+        "Pintura"
+      ],
       "datasets": [
         {
-          "data": [1, 5, 4, 8]
+          "data": [
+            1,
+            5,
+            4,
+            8
+          ]
         }
       ]
     }
   },
   "transacoes": [
-    { "tipo": "entrada", "data": "2024-01-01", "metodoPagamento": "Cartão de Crédito", "valor": 100.0 },
-    { "tipo": "saida", "data": "2024-01-02", "metodoPagamento": "Boleto", "valor": 50.0 },
-    { "tipo": "entrada", "data": "2024-01-03", "metodoPagamento": "Transferência", "valor": 200.0 },
-    { "tipo": "saida", "data": "2024-01-04", "metodoPagamento": "Pix", "valor": 30.0 },
-    { "tipo": "entrada", "data": "2024-01-05", "metodoPagamento": "Cartão de Débito", "valor": 400.0 },
-    { "tipo": "saida", "data": "2024-01-06", "metodoPagamento": "Boleto", "valor": 100.0 },
-    { "tipo": "entrada", "data": "2024-01-07", "metodoPagamento": "Cartão de Crédito", "valor": 250.0 },
-    { "tipo": "saida", "data": "2024-01-08", "metodoPagamento": "Pix", "valor": 70.0 },
-    { "tipo": "entrada", "data": "2024-01-09", "metodoPagamento": "Transferência", "valor": 300.0 },
-    { "tipo": "saida", "data": "2024-01-10", "metodoPagamento": "Boleto", "valor": 120.0 },
-    { "tipo": "entrada", "data": "2024-01-11", "metodoPagamento": "Cartão de Crédito", "valor": 500.0 },
-    { "tipo": "saida", "data": "2024-01-12", "metodoPagamento": "Pix", "valor": 60.0 },
-    { "tipo": "entrada", "data": "2024-01-13", "metodoPagamento": "Cartão de Débito", "valor": 450.0 },
-    { "tipo": "saida", "data": "2024-01-14", "metodoPagamento": "Boleto", "valor": 80.0 },
-    { "tipo": "entrada", "data": "2024-01-15", "metodoPagamento": "Transferência", "valor": 600.0 },
-    { "tipo": "saida", "data": "2024-01-16", "metodoPagamento": "Pix", "valor": 90.0 },
-    { "tipo": "entrada", "data": "2024-01-17", "metodoPagamento": "Cartão de Crédito", "valor": 150.0 },
-    { "tipo": "saida", "data": "2024-01-18", "metodoPagamento": "Boleto", "valor": 110.0 },
-    { "tipo": "entrada", "data": "2024-01-19", "metodoPagamento": "Transferência", "valor": 700.0 },
-    { "tipo": "saida", "data": "2024-01-20", "metodoPagamento": "Pix", "valor": 40.0 },
-    { "tipo": "entrada", "data": "2024-01-21", "metodoPagamento": "Cartão de Débito", "valor": 350.0 },
-    { "tipo": "saida", "data": "2024-01-22", "metodoPagamento": "Boleto", "valor": 60.0 },
-    { "tipo": "entrada", "data": "2024-01-23", "metodoPagamento": "Transferência", "valor": 550.0 },
-    { "tipo": "saida", "data": "2024-01-24", "metodoPagamento": "Pix", "valor": 20.0 }
+    {
+      "tipo": "entrada",
+      "data": "2024-01-01",
+      "metodoPagamento": "Cartão de Crédito",
+      "valor": 100,
+      "ServicosRealizados": [
+        {
+          "nome": "Corte de Cabelo",
+          "descricao": "Corte de pontas",
+          "preco": 50,
+          "data": "2024-01-01"
+        },
+        {
+          "nome": "Escova",
+          "descricao": "Escova simples",
+          "preco": 50,
+          "data": "2024-01-01"
+        }
+      ],
+      "id": "979a"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-02",
+      "metodoPagamento": "Boleto",
+      "valor": 50,
+      "id": "e52d"
+    },
+    {
+      "id": "cd5c",
+      "tipo": "entrada",
+      "data": "2024-10-01",
+      "metodoPagamento": "Dinheiro",
+      "valor": 120,
+      "servicosRealizados": [
+        {
+          "nome": "Corte de Cabelo",
+          "descricao": "corte simples",
+          "preco": 100,
+          "data": "2024-10-20T19:00:12.778Z"
+        },
+        {
+          "nome": "Tintura",
+          "descricao": "cor castanha",
+          "preco": 20,
+          "data": "2024-10-20T19:00:39.301Z"
+        }
+      ]
+    }
   ]
 }
