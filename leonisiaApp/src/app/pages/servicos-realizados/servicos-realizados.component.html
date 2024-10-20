@@ -13,8 +13,8 @@
       <tbody>
         <tr *ngFor="let realizado of servicosRealizados">
           <td>{{ realizado.nome }}</td>
-          <td>{{ realizado.data | date }}</td>
-          <td>R$ {{ realizado.preco | number:'1.2-2' }}</td>
+          <td>{{ realizado.data}}</td>
+          <td>R$ {{ realizado.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</td>
         </tr>
       </tbody>
     </table>

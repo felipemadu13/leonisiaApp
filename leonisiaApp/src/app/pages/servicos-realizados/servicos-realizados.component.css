@@ -1,0 +1,49 @@
+.screen {
+    display: flex;
+  }
+  
+  .app-siderbar-menu {
+    flex: 0 0 250px; /* Largura fixa para a sidebar */
+    background-color: #f8f9fa; /* Cor de fundo opcional */
+  }
+  
+  .content {
+    flex: 1; /* O conteúdo ocupará o espaço restante */
+    padding: 20px;
+  }
+  
+  .filter-tabs {
+    margin-bottom: 20px;
+  }
+  
+  .filter-tabs button {
+    margin-right: 10px;
+    padding: 5px 10px;
+  }
+  
+  .filter-tabs button.active {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+  }
+  
+  .service-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .service-list li {
+    margin-bottom: 10px;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+  }
+  
