@@ -39,7 +39,11 @@
                 </select>
                 
                 <label for="metodoPagamento">Método de Pagamento:</label>
-                <input type="text" id="metodoPagamento" [(ngModel)]="novaTransacao.metodoPagamento">
+                <select id="metodoPagamento" [(ngModel)]="novaTransacao.metodoPagamento">
+                        <option value="Dinheiro">Dinheiro</option>
+                        <option value="PIX">PIX</option>
+                        <option value="Cartão de Crédito">Cartão de Crédito</option>
+                </select>
                 
                 <label for="data">Data:</label>
                 <input type="date" id="data" [(ngModel)]="novaTransacao.data">
