@@ -1,0 +1,21 @@
+<!-- servicos-realizados.component.html -->
+
+<div class="container mt-5">
+    <h2 class="mb-4">Serviços Realizados</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Serviço</th>
+          <th>Data</th>
+          <th>Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let realizado of servicosRealizados">
+          <td>{{ realizado.nome }}</td>
+          <td>{{ realizado.data | date }}</td>
+          <td>R$ {{ realizado.preco | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
