@@ -38,12 +38,23 @@ export class TransacoesComponent implements OnInit {
 
   constructor(private transacoesService: TransacoesService) {}
 
+  // ngOnInit(): void {
+  //   this.transacoesService.getTransactions().subscribe((data) => {
+  //     this.transacoes = data;
+  //     this.filterTransactions();
+  //   });
+  // }
+
   ngOnInit(): void {
-    this.transacoesService.getTransactions().subscribe((data) => {
-      this.transacoes = data;
-      this.filterTransactions();
-    });
-  }
+  this.transacoesService.getTransactions().subscribe((data) => {
+    // Ordena as transações da mais nova para a mais velha
+    this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
+    
+    // Aplica o filtro nas transações
+    this.filterTransactions();
+  });
+}
+
 
   filterTransactions(): void {
     if (this.selectedTab === 'tudo') {
