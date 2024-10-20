@@ -6,6 +6,7 @@ import { CadastroscreenComponent } from './pages/cadastroscreen/cadastroscreen.c
 import { ServicosListagemComponent } from './pages/servicos-listagem/servicos-listagem.component';
 import { RealizarServicoComponent } from './pages/realizar-servico/realizar-servico.component';
 import { TransacoesComponent } from './pages/transacoes/transacoes.component';
+import { ConfigComponent } from './pages/config/config.component';
 
 export const routes: Routes = [
   { path: '', component: LoginscreenComponent },
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'servicos', component: ServicosListagemComponent },
   { path: 'realizar-servico', component: RealizarServicoComponent },
   { path: 'transacoes', component: TransacoesComponent },
-  { path: '', redirectTo: '/servicos', pathMatch: 'full' }  // Redireciona para a listagem de serviços como padrão
+  { path: '', redirectTo: '/servicos', pathMatch: 'full' },  // Redireciona para a listagem de serviços como padrão
+  { path: 'configurações', component: ConfigComponent} 
 ];
