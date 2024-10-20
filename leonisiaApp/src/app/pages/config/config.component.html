@@ -8,7 +8,7 @@
         <label>Email</label>
         <input type="email" [(ngModel)]="email" placeholder="leonisia@email.com.br" disabled />
         <button (click)="editarCampo('email')" class="btn-editar">
-            Editar <i class="fa fa-pencil"></i>
+            Editar <fa-icon [icon]="faPencil"></fa-icon>
         </button>
         </div>
     
@@ -16,14 +16,14 @@
         <label>Senha</label>
         <input type="password" [(ngModel)]="senha" placeholder="********" disabled />
         <button (click)="editarCampo('senha')" class="btn-editar">
-            Editar <i class="fa fa-pencil"></i>
+            Editar <fa-icon [icon]="faPencil"></fa-icon>
         </button>
         </div>
     
         <div class="profile-picture">
-        <img src="/assets/img/ellipse 171.svg" alt="Editar perfil" />
+        <img src="assets/img/Ellipse 171.svg" alt="Editar perfil" />
         </div>
-    
+
         <button class="btn-salvar">Salvar</button>
     </div>
   </div>
