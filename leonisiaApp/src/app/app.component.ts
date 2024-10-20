@@ -8,6 +8,7 @@ import { CadastroscreenComponent } from './pages/cadastroscreen/cadastroscreen.c
 import { FormsModule, NgModel } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { TransacoesComponent } from './pages/transacoes/transacoes.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,8 @@ import { HttpClient } from '@angular/common/http';
     SiderbarMenuComponent, 
     ResetPasswordComponent, 
     LoginscreenComponent, 
-    CadastroscreenComponent, 
+    CadastroscreenComponent,
+    TransacoesComponent,
     CommonModule, 
     FormsModule
   ],

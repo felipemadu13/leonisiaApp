@@ -1,2 +1,19 @@
-<app-siderbar-menu></app-siderbar-menu>
-<p>transacoes works!</p>
+<div class="screen">
+
+    <app-siderbar-menu></app-siderbar-menu>
+    
+    <div>
+        <button (click)="selectTab('tudo')" [class.active]="selectedTab === 'tudo'">Tudo</button>
+        <button (click)="selectTab('entrada')" [class.active]="selectedTab === 'entrada'">Entrada</button>
+        <button (click)="selectTab('saida')" [class.active]="selectedTab === 'saida'">Saída</button>
+    </div>
+    
+    <ul>
+        <li *ngFor="let transacao of transacoesFiltradas">
+            <strong>Data:</strong> {{ transacao.data | date:'dd/MM/yyyy' }} |
+            <strong>Método de Pagamento:</strong> {{ transacao.metodoPagamento }} |
+            <strong>Valor:</strong> {{ transacao.valor | currency:'BRL' }} |
+            <strong>Tipo:</strong> {{ transacao.tipo }}
+        </li>
+    </ul>
+</div>
