@@ -1,10 +1,7 @@
-// transacoes.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
 import { Transacoes } from '../../models/Transacoes';
 import { TransacoesService } from '../../services/transacoes.service';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
