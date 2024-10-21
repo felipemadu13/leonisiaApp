@@ -133,3 +133,8 @@
 .select option {
     font-size: 18px;
 }
+
+.space{
+    display: flex;
+    justify-content: space-between;
+}

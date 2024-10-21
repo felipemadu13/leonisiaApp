@@ -67,14 +67,22 @@
 
         </div>
         <div class="servi-realizados">
-            <span>Serviços realizados</span>
+            
+            <div class="space">
+                <span>Serviços realizados</span>
+                <span>Mensal</span>
+            </div>
+
             <canvas
                 baseChart
                 [data]="pieChartData"
                 [type]="pieChartType"
                 [options]="pieChartOptions"
             >
+            
             </canvas>
+          
+
         </div>
     </div>
 </div>
