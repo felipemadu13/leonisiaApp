@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ServicoService } from '@services/servico.service';
+import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
 
 interface Servico {
   id?: number;
@@ -16,7 +17,8 @@ interface Servico {
 @Component({
   selector: 'app-servicos-cadastro',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [SiderbarMenuComponent, ReactiveFormsModule, CommonModule],
+
   templateUrl: './servicos-cadastro.component.html',
   styleUrls: ['./servicos-cadastro.component.css']
 })
