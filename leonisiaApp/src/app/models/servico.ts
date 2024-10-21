@@ -1,6 +1,6 @@
 export interface Servico {
   nome: string;
   descricao: string;
-  preco: number;
+  valor: number;
   data: Date;
 }
