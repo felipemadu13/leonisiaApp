@@ -1,6 +1,7 @@
-<!-- servicos-realizados.component.html -->
-
-<div class="container mt-5">
+<div class="screen">
+  <app-siderbar-menu></app-siderbar-menu>
+  
+  <div class="container mt-5">
     <h2 class="mb-4">Serviços Realizados</h2>
     <table class="table table-striped">
       <thead>
@@ -13,9 +14,10 @@
       <tbody>
         <tr *ngFor="let realizado of servicosRealizados">
           <td>{{ realizado.nome }}</td>
-          <td>{{ realizado.data}}</td>
-          <td>R$ {{ realizado.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</td>
+          <td>{{ realizado.data }}</td>
+          <td>R$ {{ realizado.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
         </tr>
       </tbody>
     </table>
+  </div>
 </div>
