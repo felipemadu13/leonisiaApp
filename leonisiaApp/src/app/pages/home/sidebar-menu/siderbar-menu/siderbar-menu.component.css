@@ -48,15 +48,17 @@
   /*largura quando colapsado */
 }
 
-.sidebar.collapsed .logo{
-  width:100%;
+.sidebar.collapsed .logo {
+  width: 100%;
   height: 100%;
- 
+
 }
-.sidebar .logo{
-  width:100%;
+
+.sidebar .logo {
+  width: 100%;
   height: 100%;
 }
+
 .sidebar.collapsed ul li span {
   display: none;
 }
