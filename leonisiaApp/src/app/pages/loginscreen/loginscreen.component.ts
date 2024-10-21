@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-loginscreen',
   standalone: true,
-  imports: [],
+  imports: [FormsModule ],
   templateUrl: './loginscreen.component.html',
   styleUrl: './loginscreen.component.css'
 })
@@ -21,8 +21,11 @@ export class LoginscreenComponent {
     }
   }
   goToHome() {
-    this.goToHome = () => {
-      this.router.navigate(['/home'])
+    if (this.email && this.password) {
+      this.router.navigate(['/home']);
+    } else {
+      
+      alert("Por favor, preencha o e-mail e a senha.");
     }
   }
 }
