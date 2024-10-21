@@ -55,7 +55,21 @@
       "data": "2024-01-01",
       "metodoPagamento": "Cartão de Crédito",
       "valor": 100,
-      "id": "1171"
+      "id": "1171",
+      "ServicosRealizados": [
+        {
+          "nome": "Corte de Cabelo",
+          "descricao": "Corte de pontas",
+          "preco": 50,
+          "data": "2024-01-01"
+        },
+        {
+          "nome": "Escova",
+          "descricao": "Escova simples",
+          "preco": 50,
+          "data": "2024-01-01"
+        }
+      ]
     },
     {
       "tipo": "saida",
@@ -217,6 +231,27 @@
       "metodoPagamento": "Pix",
       "valor": 20,
       "id": "92cb"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-10-01",
+      "metodoPagamento": "Dinheiro",
+      "valor": 120,
+      "id": "cd5c",
+      "servicosRealizados": [
+        {
+          "nome": "Corte de Cabelo",
+          "descricao": "corte simples",
+          "preco": 100,
+          "data": "2024-10-20T19:00:12.778Z"
+        },
+        {
+          "nome": "Tintura",
+          "descricao": "cor castanha",
+          "preco": 20,
+          "data": "2024-10-20T19:00:39.301Z"
+        }
+      ]
     }
   ],
   "servicos": [
@@ -228,7 +263,7 @@
     },
     {
       "id": "3e84",
-      "nome": "Cabelo 💇 ",
+      "nome": "Cabelo 💇",
       "descricao": "Corte simples",
       "valor": 10.99
     },
@@ -237,6 +272,12 @@
       "nome": "Prancha",
       "descricao": "Simples",
       "valor": 15.99
+    },
+    {
+      "id": "e52d",
+      "nome": "Novo Serviço",
+      "descricao": "Serviço adicionado recentemente",
+      "valor": 50
     }
   ]
 }

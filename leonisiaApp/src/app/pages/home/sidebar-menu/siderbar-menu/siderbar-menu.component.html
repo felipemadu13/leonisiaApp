@@ -1,6 +1,6 @@
 <div class="sidebar" [class.collapsed]="isCollapsed">
   <button (click)="toggleMenu()" class="toggle-btn">
-    <img class="logo" src="assets/img/logo.png">
+    <img class="logo" src="assets/img/logo-sem bg.png">
   </button>
 
   <ul>
@@ -34,7 +34,7 @@
 
     <li>
       <!-- Ajustar quando o componente configurações for criado -->
-      <a href="#">
+      <a routerLink="/configurações" routerLinkActive="active">
         <fa-icon [icon]="faCog"></fa-icon> 
         <span *ngIf="!isCollapsed">Configurações</span>
       </a>
