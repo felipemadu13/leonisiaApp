@@ -1,3 +1,5 @@
+// transacoes.component.ts
+
 import { Component, OnInit } from '@angular/core';
 import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
 import { Transacoes } from '../../models/Transacoes';
