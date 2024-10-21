@@ -1,13 +1,10 @@
-// servicos-realizados.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt'; 
-import { LOCALE_ID } from '@angular/core';
-import { NgFor } from '@angular/common';
+import { ServicosRealizadosService } from '@services/servicos-realizados.service';
 
+registerLocaleData(localePt); 
 
 @Component({
   selector: 'app-servicos-realizados',
@@ -20,15 +17,13 @@ import { NgFor } from '@angular/common';
     { provide: 'LOCALE_ID', useValue: 'pt-BR' },
   ]
 })
-
-
 export class ServicosRealizadosComponent implements OnInit {
   servicosRealizados: any[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private servicosRealizadosService: ServicosRealizadosService) { }
 
   ngOnInit(): void {
-    this.http.get<any[]>('http://localhost:8000/api/servicos-realizados').subscribe(data => {
+    this.servicosRealizadosService.getServicosRealizados().subscribe(data => {
       this.servicosRealizados = data;
     });
   }
