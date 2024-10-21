@@ -1,5 +1,3 @@
-//  app.routes.ts
-
 import { Routes } from '@angular/router';
 import { LoginscreenComponent } from './pages/loginscreen/loginscreen.component';
 import { HomeComponent } from './pages/home/home/home.component';
@@ -8,6 +6,7 @@ import { ServicosListagemComponent } from './pages/servicos-listagem/servicos-li
 import { ServicosRealizadosComponent } from './pages/servicos-realizados/servicos-realizados.component';
 import { TransacoesComponent } from './pages/transacoes/transacoes.component';
 import { ServicosCadastroComponent } from './pages/servicos-cadastro/servicos-cadastro.component';
+import { ConfigComponent } from './pages/config/config.component';
 
 export const routes: Routes = [
   { path: '', component: LoginscreenComponent },
@@ -18,5 +17,6 @@ export const routes: Routes = [
   { path: 'servicos/editar/:id', component: ServicosCadastroComponent },
   { path: 'servicos-realizados', component: ServicosRealizadosComponent },
   { path: 'transacoes', component: TransacoesComponent },
+  { path: 'configurações', component: ConfigComponent },
   { path: '**', redirectTo: '/servicos', pathMatch: 'full' }
 ];
