@@ -15,7 +15,7 @@
       <tbody>
         <tr *ngFor="let servico of servicos">
           <td>{{ servico.nome }}</td>
-          <td>R$ {{ servico.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+          <td>{{ servico.valor | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
           <td class="text-center">
             <button (click)="deletarServico(servico.id)" class="btn btn-danger">Excluir</button>
           </td>
@@ -25,5 +25,6 @@
         </tr>
       </tbody>
     </table>
+    <button (click)="irParaCadastro()">Cadastar Serviço</button>
   </div>
 </div>

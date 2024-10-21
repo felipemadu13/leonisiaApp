@@ -256,10 +256,10 @@
   ],
   "servicos": [
     {
-      "id": "2",
-      "nome": "Manicure",
+      "nome": "Manicure e Pedicure",
       "descricao": "Corte e pintura de unhas",
-      "valor": 25
+      "valor": 25,
+      "id": "2"
     },
     {
       "id": "3e84",
@@ -268,16 +268,10 @@
       "valor": 10.99
     },
     {
-      "id": "b408",
-      "nome": "Prancha",
-      "descricao": "Simples",
-      "valor": 15.99
-    },
-    {
-      "id": "e52d",
-      "nome": "Novo Serviço",
-      "descricao": "Serviço adicionado recentemente",
-      "valor": 50
+      "id": "82ad",
+      "nome": "Corte de cabelo masculino",
+      "descricao": "corte de cabelos para homens e meninos",
+      "valor": 30
     }
   ]
 }

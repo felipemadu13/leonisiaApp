@@ -39,6 +39,12 @@ export class ServicosListagemComponent implements OnInit {
   }
 
   editarServico(id: number): void {
-    this.router.navigate(['/editar-servico', id]);
+    this.router.navigate(['/servicos/editar/', id]);
   }
+
+  irParaCadastro(): void {
+    this.router.navigate(['/servicos/cadastro']);
+  }
+
+
 }
