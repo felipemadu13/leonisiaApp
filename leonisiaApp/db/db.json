@@ -5,50 +5,238 @@
     "entradaMensal": 1181.98,
     "saidaDiario": 290.99,
     "saidaMensal": 450.98,
-    "balancoDiario": 300.00,
-    "balancoMensal": 731.00,
+    "balancoDiario": 300,
+    "balancoMensal": 731,
     "BarChartData": {
-      "labels": ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
+      "labels": [
+        "Jan",
+        "Fev",
+        "Mar",
+        "Abr",
+        "Mai",
+        "Jun"
+      ],
       "datasets": [
         {
-          "data": [65.50, 59, 80, 81, 56, 55],
+          "data": [
+            65.5,
+            59,
+            80,
+            81,
+            56,
+            55
+          ],
           "label": "Balanço"
         }
       ]
     },
     "PieChartData": {
-      "labels": ["Corte Masculino", "Corte Feminimo", "Escova", "Pintura"],
+      "labels": [
+        "Corte Masculino",
+        "Corte Feminimo",
+        "Escova",
+        "Pintura"
+      ],
       "datasets": [
         {
-          "data": [1, 5, 4, 8]
+          "data": [
+            1,
+            5,
+            4,
+            8
+          ]
         }
       ]
     }
   },
   "transacoes": [
-    { "tipo": "entrada", "data": "2024-01-01", "metodoPagamento": "Cartão de Crédito", "valor": 100.0 },
-    { "tipo": "saida", "data": "2024-01-02", "metodoPagamento": "Boleto", "valor": 50.0 },
-    { "tipo": "entrada", "data": "2024-01-03", "metodoPagamento": "Transferência", "valor": 200.0 },
-    { "tipo": "saida", "data": "2024-01-04", "metodoPagamento": "Pix", "valor": 30.0 },
-    { "tipo": "entrada", "data": "2024-01-05", "metodoPagamento": "Cartão de Débito", "valor": 400.0 },
-    { "tipo": "saida", "data": "2024-01-06", "metodoPagamento": "Boleto", "valor": 100.0 },
-    { "tipo": "entrada", "data": "2024-01-07", "metodoPagamento": "Cartão de Crédito", "valor": 250.0 },
-    { "tipo": "saida", "data": "2024-01-08", "metodoPagamento": "Pix", "valor": 70.0 },
-    { "tipo": "entrada", "data": "2024-01-09", "metodoPagamento": "Transferência", "valor": 300.0 },
-    { "tipo": "saida", "data": "2024-01-10", "metodoPagamento": "Boleto", "valor": 120.0 },
-    { "tipo": "entrada", "data": "2024-01-11", "metodoPagamento": "Cartão de Crédito", "valor": 500.0 },
-    { "tipo": "saida", "data": "2024-01-12", "metodoPagamento": "Pix", "valor": 60.0 },
-    { "tipo": "entrada", "data": "2024-01-13", "metodoPagamento": "Cartão de Débito", "valor": 450.0 },
-    { "tipo": "saida", "data": "2024-01-14", "metodoPagamento": "Boleto", "valor": 80.0 },
-    { "tipo": "entrada", "data": "2024-01-15", "metodoPagamento": "Transferência", "valor": 600.0 },
-    { "tipo": "saida", "data": "2024-01-16", "metodoPagamento": "Pix", "valor": 90.0 },
-    { "tipo": "entrada", "data": "2024-01-17", "metodoPagamento": "Cartão de Crédito", "valor": 150.0 },
-    { "tipo": "saida", "data": "2024-01-18", "metodoPagamento": "Boleto", "valor": 110.0 },
-    { "tipo": "entrada", "data": "2024-01-19", "metodoPagamento": "Transferência", "valor": 700.0 },
-    { "tipo": "saida", "data": "2024-01-20", "metodoPagamento": "Pix", "valor": 40.0 },
-    { "tipo": "entrada", "data": "2024-01-21", "metodoPagamento": "Cartão de Débito", "valor": 350.0 },
-    { "tipo": "saida", "data": "2024-01-22", "metodoPagamento": "Boleto", "valor": 60.0 },
-    { "tipo": "entrada", "data": "2024-01-23", "metodoPagamento": "Transferência", "valor": 550.0 },
-    { "tipo": "saida", "data": "2024-01-24", "metodoPagamento": "Pix", "valor": 20.0 }
+    {
+      "tipo": "entrada",
+      "data": "2024-01-01",
+      "metodoPagamento": "Cartão de Crédito",
+      "valor": 100,
+      "id": "1171"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-02",
+      "metodoPagamento": "Boleto",
+      "valor": 50,
+      "id": "485c"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-03",
+      "metodoPagamento": "Transferência",
+      "valor": 200,
+      "id": "d835"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-04",
+      "metodoPagamento": "Pix",
+      "valor": 30,
+      "id": "885f"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-05",
+      "metodoPagamento": "Cartão de Débito",
+      "valor": 400,
+      "id": "c1a5"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-06",
+      "metodoPagamento": "Boleto",
+      "valor": 100,
+      "id": "f80f"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-07",
+      "metodoPagamento": "Cartão de Crédito",
+      "valor": 250,
+      "id": "1852"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-08",
+      "metodoPagamento": "Pix",
+      "valor": 70,
+      "id": "87c8"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-09",
+      "metodoPagamento": "Transferência",
+      "valor": 300,
+      "id": "c9f9"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-10",
+      "metodoPagamento": "Boleto",
+      "valor": 120,
+      "id": "57bc"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-11",
+      "metodoPagamento": "Cartão de Crédito",
+      "valor": 500,
+      "id": "a0d7"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-12",
+      "metodoPagamento": "Pix",
+      "valor": 60,
+      "id": "b7e4"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-13",
+      "metodoPagamento": "Cartão de Débito",
+      "valor": 450,
+      "id": "55cd"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-14",
+      "metodoPagamento": "Boleto",
+      "valor": 80,
+      "id": "ba9c"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-15",
+      "metodoPagamento": "Transferência",
+      "valor": 600,
+      "id": "b599"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-16",
+      "metodoPagamento": "Pix",
+      "valor": 90,
+      "id": "8cb4"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-17",
+      "metodoPagamento": "Cartão de Crédito",
+      "valor": 150,
+      "id": "ad4f"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-18",
+      "metodoPagamento": "Boleto",
+      "valor": 110,
+      "id": "43c8"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-19",
+      "metodoPagamento": "Transferência",
+      "valor": 700,
+      "id": "c979"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-20",
+      "metodoPagamento": "Pix",
+      "valor": 40,
+      "id": "a4eb"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-21",
+      "metodoPagamento": "Cartão de Débito",
+      "valor": 350,
+      "id": "b297"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-22",
+      "metodoPagamento": "Boleto",
+      "valor": 60,
+      "id": "0bed"
+    },
+    {
+      "tipo": "entrada",
+      "data": "2024-01-23",
+      "metodoPagamento": "Transferência",
+      "valor": 550,
+      "id": "70cb"
+    },
+    {
+      "tipo": "saida",
+      "data": "2024-01-24",
+      "metodoPagamento": "Pix",
+      "valor": 20,
+      "id": "92cb"
+    }
+  ],
+  "servicos": [
+    {
+      "id": "2",
+      "nome": "Manicure",
+      "descricao": "Corte e pintura de unhas",
+      "valor": 25
+    },
+    {
+      "id": "3e84",
+      "nome": "Cabelo 💇 ",
+      "descricao": "Corte simples",
+      "valor": 10.99
+    },
+    {
+      "id": "b408",
+      "nome": "Prancha",
+      "descricao": "Simples",
+      "valor": 15.99
+    }
   ]
 }
