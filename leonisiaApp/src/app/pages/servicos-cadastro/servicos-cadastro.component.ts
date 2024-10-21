@@ -6,13 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ServicoService } from '@services/servico.service';
 import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
+import { Servico } from '../../models/Servico';
 
-interface Servico {
-  id?: number;
-  nome: string;
-  descricao: string;
-  valor: number;
-}
 
 @Component({
   selector: 'app-servicos-cadastro',
