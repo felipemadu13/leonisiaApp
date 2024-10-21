@@ -48,7 +48,7 @@
           <h3>Serviços Realizados</h3>
 
           <div *ngFor="let servico of novaTransacao.servicosRealizados">
-            <p><strong>Nome:</strong> {{ servico.nome }} | <strong>Descrição:</strong> {{ servico.descricao }} | <strong>Preço:</strong> {{ servico.preco | currency:'BRL' }}</p>
+            <p><strong>Nome:</strong> {{ servico.nome }} | <strong>Descrição:</strong> {{ servico.descricao }} | <strong>Preço:</strong> {{ servico.valor | currency:'BRL' }}</p>
           </div>
 
           <h4>Adicionar Serviço</h4>
@@ -59,7 +59,7 @@
           <input type="text" id="descricaoServico" [(ngModel)]="novoServico.descricao">
 
           <label for="precoServico">Preço:</label>
-          <input type="number" id="precoServico" [(ngModel)]="novoServico.preco">
+          <input type="number" id="precoServico" [(ngModel)]="novoServico.valor">
 
           <button (click)="addServico()">Adicionar Serviço</button>
         </div>

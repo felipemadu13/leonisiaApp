@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 // import { Servico } from '@models/servico'; (Deixar assim não deixa o projeto funcionar no Angular)
-import { Servico } from '../models/servico';
+import { Servico } from '../models/Servico';
 
 @Injectable({
   providedIn: 'root'
