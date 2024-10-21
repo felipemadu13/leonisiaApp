@@ -26,6 +26,13 @@
     </li>
 
     <li>
+      <a routerLink="/servicos-realizados" routerLinkActive="active">
+        <fa-icon [icon]="faCut"></fa-icon> 
+        <span *ngIf="!isCollapsed">Serviços Realizados</span>
+      </a>
+    </li>
+
+    <li>
       <!-- Ajustar quando o componente configurações for criado -->
       <a routerLink="/configurações" routerLinkActive="active">
         <fa-icon [icon]="faCog"></fa-icon> 

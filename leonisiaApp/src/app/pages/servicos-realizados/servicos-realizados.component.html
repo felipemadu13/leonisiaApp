@@ -1,0 +1,23 @@
+<div class="screen">
+  <app-siderbar-menu></app-siderbar-menu>
+  
+  <div class="container mt-5">
+    <h2 class="mb-4">Serviços Realizados</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Serviço</th>
+          <th>Data</th>
+          <th>Preço</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let realizado of servicosRealizados">
+          <td>{{ realizado.nome }}</td>
+          <td>{{ realizado.data }}</td>
+          <td>R$ {{ realizado.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
