@@ -252,6 +252,21 @@
           "data": "2024-10-20T19:00:39.301Z"
         }
       ]
+    },
+    {
+      "id": "1406",
+      "tipo": "entrada",
+      "data": "2024-10-22",
+      "metodoPagamento": "Cartão de Crédito",
+      "valor": 100,
+      "servicosRealizados": [
+        {
+          "nome": "Cabelo",
+          "descricao": "cabelo corte",
+          "valor": 100,
+          "data": "2024-10-21T15:14:32.796Z"
+        }
+      ]
     }
   ],
   "servicos": [

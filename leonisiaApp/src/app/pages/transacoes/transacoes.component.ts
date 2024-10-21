@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
 import { Transacoes } from '../../models/Transacoes';
 import { TransacoesService } from '../../services/transacoes.service';
+import { Servico } from '../../models/Servico';
+import { ServicoService } from '@services/servico.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -18,6 +20,7 @@ export class TransacoesComponent implements OnInit {
   transacoes: Transacoes[] = [];
   transacoesFiltradas: Transacoes[] = [];
   paginatedTransacoes: Transacoes[] = [];
+  servicos: Servico[] = [];
 
   selectedTab: string = 'tudo';
   showModal: boolean = false;  // Controla a exibição do modal
@@ -43,13 +46,17 @@ export class TransacoesComponent implements OnInit {
   currentPage: number = 1;
   totalPages: number = 1;
 
-  constructor(private transacoesService: TransacoesService) {}
+  constructor(private transacoesService: TransacoesService, private servicoService: ServicoService) {}
 
   ngOnInit(): void {
     this.transacoesService.getTransactions().subscribe((data) => {
       this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
       this.filterTransactions();
     });
+
+    this.servicoService.getServicos().subscribe((data) => {
+      this.servicos = data;
+    })
   }
 
   filterTransactions(): void {

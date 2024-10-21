@@ -53,7 +53,9 @@
 
           <h4>Adicionar Serviço</h4>
           <label for="nomeServico">Nome:</label>
-          <input type="text" id="nomeServico" [(ngModel)]="novoServico.nome">
+          <select id="nomeServico" [(ngModel)]="novoServico.nome">
+            <option *ngFor="let servico of servicos" [value]="servico.nome">{{ servico.nome }}</option>
+          </select>
 
           <label for="descricaoServico">Descrição:</label>
           <input type="text" id="descricaoServico" [(ngModel)]="novoServico.descricao">
