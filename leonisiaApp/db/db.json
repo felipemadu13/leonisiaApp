@@ -271,12 +271,6 @@
   ],
   "servicos": [
     {
-      "nome": "Manicure e Pedicure",
-      "descricao": "Corte e pintura de unhas",
-      "valor": 25,
-      "id": "2"
-    },
-    {
       "nome": "Cabelo ",
       "descricao": "Corte simples",
       "valor": 10.99,
