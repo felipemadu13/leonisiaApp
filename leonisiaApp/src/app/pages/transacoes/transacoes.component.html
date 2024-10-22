@@ -2,21 +2,28 @@
 
 <div class="screen">
   <app-siderbar-menu></app-siderbar-menu>
-  <div>
-    <div>
+  <div class="container">
+    <div class="button_container">
       <button (click)="selectTab('tudo')" [class.active]="selectedTab === 'tudo'">Tudo</button>
       <button (click)="selectTab('entrada')" [class.active]="selectedTab === 'entrada'">Entrada</button>
       <button (click)="selectTab('saida')" [class.active]="selectedTab === 'saida'">Saída</button>
     </div>
-    <ul>
-      <li *ngFor="let transacao of paginatedTransacoes">
-        <strong>Data:</strong> {{ transacao.data | date:'dd/MM/yyyy' }} |
-        <strong>Método de Pagamento:</strong> {{ transacao.metodoPagamento }} |
-        <strong>Valor:</strong> {{ transacao.valor | currency:'BRL' }} |
-        <strong>Tipo:</strong> {{ transacao.tipo }}
+
+    <ul class="transacao_container">
+      <div class="transacao_header">
+        <strong>Data</strong>
+        <strong>Método de Pagamento</strong>
+        <strong>Valor</strong>
+        <strong>Tipo</strong>
+      </div>
+      <li *ngFor="let transacao of paginatedTransacoes" class="transacao_data">
+        <p>{{ transacao.data | date:'dd/MM/yyyy' }}</p>
+        <p> {{ transacao.metodoPagamento }}</p>
+        <p>{{ transacao.valor | currency:'BRL' }}</p>
+        <p>{{ transacao.tipo }}</p>
       </li>
     </ul>
-    <button (click)="openModal()">Nova Transação</button>
+    <button (click)="openModal()" class="nova_transacao">Nova Transação</button>
     <div class="pagination">
       <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
@@ -48,7 +55,9 @@
           <h3>Serviços Realizados</h3>
 
           <div *ngFor="let servico of novaTransacao.servicosRealizados">
-            <p><strong>Nome:</strong> {{ servico.nome }} | <strong>Descrição:</strong> {{ servico.descricao }} | <strong>Preço:</strong> {{ servico.valor | currency:'BRL' }}</p>
+            <p><strong>Nome:</strong> {{ servico.nome }} | <strong>Descrição:</strong> {{ servico.descricao }} |
+              <strong>Preço:</strong> {{ servico.valor | currency:'BRL' }}
+            </p>
           </div>
 
           <h4>Adicionar Serviço</h4>
