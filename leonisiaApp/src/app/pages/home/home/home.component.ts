@@ -9,10 +9,10 @@ import { Dashboard } from '../../../models/Dashboard';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { registerLocaleData } from '@angular/common';
-import localePt from '@angular/common/locales/pt'; 
+import localePt from '@angular/common/locales/pt';
 import { LOCALE_ID } from '@angular/core';
 
-registerLocaleData(localePt); 
+registerLocaleData(localePt);
 
 Chart.register(DataLabelsPlugin);
 
@@ -33,32 +33,32 @@ export class HomeComponent {
 
   // Gráfico de Barra
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-  scales: {
-    x: {},
-    y: {
-      min: 10,
-      ticks: {
-        callback: (value: any) => {
+    scales: {
+      x: {},
+      y: {
+        min: 10,
+        ticks: {
+          callback: (value: any) => {
+            const currencyPipe = new CurrencyPipe('pt-BR');
+            return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
+          }
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: true,
+      },
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        formatter: (value: any) => {
           const currencyPipe = new CurrencyPipe('pt-BR');
           return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
         }
-      }
-    }
-  },
-  plugins: {
-    legend: {
-      display: true,
+      },
     },
-    datalabels: {
-      anchor: 'end',
-      align: 'end',
-      formatter: (value: any) => {
-        const currencyPipe = new CurrencyPipe('pt-BR');
-        return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
-      }
-    },
-  },
-};
+  };
 
   public barChartType: keyof ChartTypeRegistry = 'bar';
 
@@ -70,7 +70,7 @@ export class HomeComponent {
   };
 
   // Gráfico de Pizza
-    public pieChartOptions: ChartConfiguration['options'] = {
+  public pieChartOptions: ChartConfiguration['options'] = {
     plugins: {
       legend: {
         display: true,
@@ -119,19 +119,19 @@ export class HomeComponent {
   saida: string = 'diario';
   balanco: string = 'diario';
 
-  constructor(private dashboardService: DashboardService) {}
+  constructor(private dashboardService: DashboardService) { }
 
-ngOnInit(): void {
-  this.dashboardService.getDashboard().subscribe(data => {
-    this.dashboard = data;
+  ngOnInit(): void {
+    this.dashboardService.getDashboard().subscribe(data => {
+      this.dashboard = data;
 
-    this.barChartData.labels = data.BarChartData.labels;
-    this.barChartData.datasets = data.BarChartData.datasets;
+      this.barChartData.labels = data.BarChartData.labels;
+      this.barChartData.datasets = data.BarChartData.datasets;
 
-    this.pieChartData.labels = data.PieChartData.labels;
-    this.pieChartData.datasets = data.PieChartData.datasets;
+      this.pieChartData.labels = data.PieChartData.labels;
+      this.pieChartData.datasets = data.PieChartData.datasets;
 
-    this.chart?.update();
-  });
-}
+      this.chart?.update();
+    });
+  }
 }
