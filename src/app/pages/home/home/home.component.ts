@@ -33,6 +33,8 @@ export class HomeComponent {
 
   // Gráfico de Barra
   public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
     scales: {
       x: {},
       y: {
@@ -71,6 +73,8 @@ export class HomeComponent {
 
   // Gráfico de Pizza
   public pieChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         display: true,

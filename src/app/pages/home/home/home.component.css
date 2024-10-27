@@ -136,3 +136,15 @@
     display: flex;
     justify-content: space-between;
 }
+
+#barChart{
+    margin: auto;
+    max-width: 100%; 
+    height: 70%;
+}
+
+#pieChart{
+    margin: auto;
+    width: 90%; 
+    height: 90%;
+}

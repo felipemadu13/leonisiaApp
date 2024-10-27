@@ -6,9 +6,10 @@
                 <span class="saldo-title">Saldo Geral</span>
                 <span class="saldo-value">{{ dashboard.saldoGeral | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
             </div>
-
-            <canvas baseChart [data]="dashboard.BarChartData" [options]="barChartOptions">
-            </canvas>
+    <div id="barChart">
+        <canvas baseChart [data]="dashboard.BarChartData" [options]="barChartOptions">
+        </canvas>
+    </div>
 
         </div>
 
@@ -75,9 +76,10 @@
                 <span>Mensal</span>
             </div>
 
-            <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
-
-            </canvas>
+            <div id="pieChart">
+                <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
+                </canvas>
+            </div>
 
 
         </div>
