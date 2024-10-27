@@ -38,18 +38,12 @@ export class HomeComponent {
     scales: {
       x: {},
       y: {
-        min: 10,
-        ticks: {
-          callback: (value: any) => {
-            const currencyPipe = new CurrencyPipe('pt-BR');
-            return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
-          }
-        }
+        display: false
       }
     },
     plugins: {
       legend: {
-        display: true,
+        display: false,
       },
       datalabels: {
         anchor: 'end',
@@ -78,7 +72,7 @@ export class HomeComponent {
     plugins: {
       legend: {
         display: true,
-        position: 'top',
+        position: 'right',
       },
       datalabels: {
         formatter: (value, ctx) => {
