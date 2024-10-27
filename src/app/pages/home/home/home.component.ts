@@ -75,12 +75,6 @@ export class HomeComponent {
         position: 'right',
       },
       datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-          return '';
-        },
       },
     },
   };
