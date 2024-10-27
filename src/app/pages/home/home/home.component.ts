@@ -28,6 +28,7 @@ Chart.register(DataLabelsPlugin);
   ]
 })
 export class HomeComponent {
+   currentDate: Date = new Date();
   // Gráficos
   @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
 
