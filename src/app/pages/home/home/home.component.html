@@ -67,7 +67,7 @@
         </div>
         <div class="servi-realizados">
             <div class="space">
-                <span class="servicos-realizados-title">Serviços realizados em {{ currentDate | date: 'dd/MM/yyyy' }}</span>
+                <span routerLink="/servicos-realizados" routerLinkActive="active" class="servicos-realizados-title">Serviços realizados em {{ currentDate | date: 'dd/MM/yyyy' }}</span>
             </div>
             <div id="pieChart">
                 <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">

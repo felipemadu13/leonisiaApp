@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
 
 registerLocaleData(localePt);
@@ -19,7 +20,7 @@ Chart.register(DataLabelsPlugin);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe],
+  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe, RouterLink, RouterOutlet],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [
