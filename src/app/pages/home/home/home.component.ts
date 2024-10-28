@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
 
 registerLocaleData(localePt);
@@ -19,7 +20,7 @@ Chart.register(DataLabelsPlugin);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe],
+  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe, RouterLink, RouterOutlet],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [
@@ -28,39 +29,9 @@ Chart.register(DataLabelsPlugin);
   ]
 })
 export class HomeComponent {
-  // Gráficos
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
+   currentDate: Date = new Date();
 
-  // Gráfico de Barra
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {},
-      y: {
-        min: 10,
-        ticks: {
-          callback: (value: any) => {
-            const currencyPipe = new CurrencyPipe('pt-BR');
-            return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
-          }
-        }
-      }
-    },
-    plugins: {
-      legend: {
-        display: true,
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-        formatter: (value: any) => {
-          const currencyPipe = new CurrencyPipe('pt-BR');
-          return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
-        }
-      },
-    },
-  };
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
 
   public barChartType: keyof ChartTypeRegistry = 'bar';
 
@@ -71,25 +42,37 @@ export class HomeComponent {
     ],
   };
 
-  // Gráfico de Pizza
-  public pieChartOptions: ChartConfiguration['options'] = {
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
     responsive: true,
     maintainAspectRatio: false,
+    scales: {
+      x: {},
+      y: { display: false }
+    },
     plugins: {
-      legend: {
-        display: true,
-        position: 'top',
-      },
+      legend: { display: false},
       datalabels: {
-        formatter: (value, ctx) => {
-          if (ctx.chart.data.labels) {
-            return ctx.chart.data.labels[ctx.dataIndex];
-          }
-          return '';
-        },
+        anchor: 'end',
+        align: 'end',
+        formatter: (value: any) => {
+          const currencyPipe = new CurrencyPipe('pt-BR');
+          return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
+        }
       },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const currencyPipe = new CurrencyPipe('pt-BR');
+            const transformedValue = currencyPipe.transform(context.parsed.y, 'BRL', 'symbol', '1.2-2');
+            return transformedValue !== null ? transformedValue : '';
+          }
+        }
+      }
     },
   };
+
+  public pieChartType: ChartType = 'pie';
+
   public pieChartData: ChartData<'pie', number[], string | string[]> = {
     labels: [],
     datasets: [
@@ -98,8 +81,19 @@ export class HomeComponent {
       },
     ],
   };
-  public pieChartType: ChartType = 'pie';
-
+  
+  public pieChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'right',
+      },
+      datalabels: {
+      },
+    },
+  };
 
   dashboard: Dashboard = {
     saldoGeral: 0,
