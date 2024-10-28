@@ -15,7 +15,6 @@
 }
 
 .dashboard-container {
-    background-color: #89a089;
     padding: 20px;
     gap: 20px;
     height: 100%; 
@@ -25,7 +24,13 @@
     grid-template-columns: repeat(2, 1fr); 
     justify-items: center;
     align-content: center;
+    background:  
+        linear-gradient(rgba(101, 125, 101, 0.5), rgba(101, 125, 101, 0.5)),
+        url('/../../../assets/vecteezy_hand-painted-watercolor-leaf-nature-background_8449889.jpg'); 
 }
+
+
+
 .saldo-geral,
 .rendimentos,
 .servi-realizados,

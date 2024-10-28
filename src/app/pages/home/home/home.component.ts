@@ -29,33 +29,8 @@ Chart.register(DataLabelsPlugin);
 })
 export class HomeComponent {
    currentDate: Date = new Date();
-  // Gráficos
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
 
-  // Gráfico de Barra
-  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
-    responsive: true,
-    maintainAspectRatio: false,
-    scales: {
-      x: {},
-      y: {
-        display: false
-      }
-    },
-    plugins: {
-      legend: {
-        display: false,
-      },
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-        formatter: (value: any) => {
-          const currencyPipe = new CurrencyPipe('pt-BR');
-          return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
-        }
-      },
-    },
-  };
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
 
   public barChartType: keyof ChartTypeRegistry = 'bar';
 
@@ -66,7 +41,46 @@ export class HomeComponent {
     ],
   };
 
-  // Gráfico de Pizza
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {},
+      y: { display: false }
+    },
+    plugins: {
+      legend: { display: false},
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        formatter: (value: any) => {
+          const currencyPipe = new CurrencyPipe('pt-BR');
+          return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
+        }
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const currencyPipe = new CurrencyPipe('pt-BR');
+            const transformedValue = currencyPipe.transform(context.parsed.y, 'BRL', 'symbol', '1.2-2');
+            return transformedValue !== null ? transformedValue : '';
+          }
+        }
+      }
+    },
+  };
+
+  public pieChartType: ChartType = 'pie';
+
+  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+    labels: [],
+    datasets: [
+      {
+        data: [],
+      },
+    ],
+  };
+  
   public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
     maintainAspectRatio: false,
@@ -79,16 +93,6 @@ export class HomeComponent {
       },
     },
   };
-  public pieChartData: ChartData<'pie', number[], string | string[]> = {
-    labels: [],
-    datasets: [
-      {
-        data: [],
-      },
-    ],
-  };
-  public pieChartType: ChartType = 'pie';
-
 
   dashboard: Dashboard = {
     saldoGeral: 0,
