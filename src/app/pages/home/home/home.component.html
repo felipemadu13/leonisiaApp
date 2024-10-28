@@ -1,7 +1,6 @@
 <div class="screen">
     <app-siderbar-menu></app-siderbar-menu>
-    
-    <div class="container">
+    <div class="dashboard-container">
         <div class="saldo-geral">
             <div class="saldo-data">
                 <span class="saldo-title">Saldo Geral</span>
@@ -12,7 +11,7 @@
                 </canvas>
             </div>
         </div>
-
+        
         <div class="rendimentos">
             <div class="entrada-saida">
                 <div class="entrada">
@@ -44,11 +43,11 @@
                         <span *ngIf="saida === 'mensal'">{{ dashboard.saidaMensal | currency:
                             'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
                     </div>
-
+                    
                 </div>
             </div>
-
-
+            
+            
             <div class="balanco">
                 <div class="balanco-header">
                     <span>Balanço</span>
@@ -57,28 +56,23 @@
                         <option value="mensal">Mensal</option>
                     </select>
                 </div>
-
+                
                 <div class="value-balanco">
                     <span *ngIf="balanco === 'diario'">{{ dashboard.balancoDiario | currency:
                         'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
                     <span *ngIf="balanco === 'mensal'">{{ dashboard.balancoMensal | currency:
                         'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
                 </div>
-
             </div>
-
         </div>
         <div class="servi-realizados">
             <div class="space">
                 <span class="servicos-realizados-title">Serviços realizados em {{ currentDate | date: 'dd/MM/yyyy' }}</span>
             </div>
-
             <div id="pieChart">
                 <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
                 </canvas>
             </div>
-
-
         </div>
     </div>
 </div>
