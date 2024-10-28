@@ -77,6 +77,13 @@
 .servicos-realizados-title {
     font-size: 40px;
     color: #657D65;
+    cursor: pointer;
+}
+
+.servicos-realizados-title:hover {
+    font-size: 40px;
+    color: #0b410b;
+    transition: 0.5s;
 }
 
 .entrada-saida {
@@ -136,6 +143,18 @@
     outline: none;
     border: none;
     background: transparent;
+    cursor: pointer;
+}
+
+.select-balanco:hover {
+    width: 15%;
+    color: #0b410b;
+    font-size: 22px;
+    font-weight: bold;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.5s;
 }
 
 
@@ -165,6 +184,20 @@
     font-size: 22px;
     font-weight: bold;
     color: #FFFFFF;
+    cursor: pointer;
+}
+
+.select:hover {
+    width: 30%;
+    outline: none;
+    border: none;
+    height: 80%;
+    background: transparent;
+    border: solid 1px #657D65;
+    font-size: 22px;
+    font-weight: bold;
+    color: #0b410b;
+    transition: 0.5s;
 }
 
 .select option {
