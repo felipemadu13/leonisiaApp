@@ -1,116 +1,135 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { Chart, ChartConfiguration, ChartData, ChartOptions, ChartType, ChartTypeRegistry } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import DataLabelsPlugin from 'chartjs-plugin-datalabels';
 import { SiderbarMenuComponent } from "../sidebar-menu/siderbar-menu/siderbar-menu.component";
-import { CommonModule } from '@angular/common';
-import { NgxEchartsDirective, provideEcharts } from 'ngx-echarts';
-import { color, EChartsOption } from 'echarts';
+import { CommonModule, CurrencyPipe } from '@angular/common';
+import { DashboardService } from '../../../services/dashboard.service';
+import { Dashboard } from '../../../models/Dashboard';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { LOCALE_ID } from '@angular/core';
+
+registerLocaleData(localePt);
+
+Chart.register(DataLabelsPlugin);
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SiderbarMenuComponent,CommonModule, NgxEchartsDirective],
+  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe, RouterLink, RouterOutlet],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css',
+  styleUrls: ['./home.component.css'],
   providers: [
-    provideEcharts(),
+    CurrencyPipe,
+    { provide: 'LOCALE_ID', useValue: 'pt-BR' },
   ]
 })
 export class HomeComponent {
+   currentDate: Date = new Date();
 
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective<'bar'> | undefined;
 
-  options: EChartsOption = {
-    color: ['#3398DB'],
-    tooltip: {
-      trigger: 'axis',
-      axisPointer: {
-        type: 'shadow',
-      },
-    },
-    grid: {
-      left: '3%',
-      right: '4%',
-      bottom: '3%',
-      containLabel: true,
-    },
-    xAxis: [
-      {
-        type: 'category',
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        axisTick: {
-          alignWithLabel: true,
-        },
-        axisLabel: {
-          color: function (value?: string | number, index?: number): string {
-            // Define diferentes cores para os dias
-            const colors = ['#FF5733', '#33FF57', '#3357FF', '#FF33A6', '#FF8333', '#8333FF', '#33FFF8'];
-            return colors[index!]; // Aplica uma cor diferente para cada dia
-          },
-        },
-      },
+  public barChartType: keyof ChartTypeRegistry = 'bar';
+
+  public barChartData: ChartData<'bar'> = {
+    labels: [],
+    datasets: [
+      { data: [], label: '' },
     ],
-    yAxis: [
-      {
-        type: 'value',
+  };
+
+  public barChartOptions: ChartConfiguration<'bar'>['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+    scales: {
+      x: {},
+      y: { display: false }
+    },
+    plugins: {
+      legend: { display: false},
+      datalabels: {
+        anchor: 'end',
+        align: 'end',
+        formatter: (value: any) => {
+          const currencyPipe = new CurrencyPipe('pt-BR');
+          return currencyPipe.transform(value, 'BRL', 'symbol', '1.2-2');
+        }
       },
-    ],
-    series: [
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const currencyPipe = new CurrencyPipe('pt-BR');
+            const transformedValue = currencyPipe.transform(context.parsed.y, 'BRL', 'symbol', '1.2-2');
+            return transformedValue !== null ? transformedValue : '';
+          }
+        }
+      }
+    },
+  };
+
+  public pieChartType: ChartType = 'pie';
+
+  public pieChartData: ChartData<'pie', number[], string | string[]> = {
+    labels: [],
+    datasets: [
       {
-        name: 'Counters',
-        type: 'bar',
-        barWidth: '60%',
-        data: [10, 52, 200, 334, 390, 330, 220],
+        data: [],
       },
     ],
   };
   
+  public pieChartOptions: ChartConfiguration['options'] = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: true,
+        position: 'right',
+      },
+      datalabels: {
+      },
+    },
+  };
 
+  dashboard: Dashboard = {
+    saldoGeral: 0,
+    entradaDiario: 0,
+    entradaMensal: 0,
+    saidaDiario: 0,
+    saidaMensal: 0,
+    balancoDiario: 0,
+    balancoMensal: 0,
+    BarChartData: {
+      labels: [],
+      datasets: [{ data: [], label: '' }],
+    },
+    PieChartData: {
+      labels: [],
+      datasets: [{ data: [], label: '' }],
+    },
+  };
 
+  entrada: string = 'diario';
+  saida: string = 'diario';
+  balanco: string = 'diario';
 
-
-
-  pieChartOption: any;
-chartOption: EChartsOption | null | undefined;
-
-  constructor() { }
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.initPieChart();
-  }
+    this.dashboardService.getDashboard().subscribe(data => {
+      this.dashboard = data;
 
-  initPieChart() {
-    this.pieChartOption = {
+      this.barChartData.labels = data.BarChartData.labels;
+      this.barChartData.datasets = data.BarChartData.datasets;
 
-      tooltip: {
-        trigger: 'item'
-      },
-      legend: {
-        orient: 'vertical',
-        right: 'left',
-        textStyle: {
-          color: '#fff'
-        }
-      },
-      series: [
-        {
-          name: 'Serviços',
-          type: 'pie',
-          radius: '50%',
-          data: [
-            { value: 1048, name: 'Serviço A' },
-            { value: 735, name: 'Serviço B' },
-            { value: 580, name: 'Serviço C' },
-            { value: 484, name: 'Serviço D' },
-            { value: 300, name: 'Serviço E' }
-          ],
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
-        }
-      ]
-    };
+      this.pieChartData.labels = data.PieChartData.labels;
+      this.pieChartData.datasets = data.PieChartData.datasets;
+
+      this.chart?.update();
+    });
   }
 }
-

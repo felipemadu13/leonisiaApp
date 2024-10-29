@@ -1,12 +1,31 @@
+// cadastroscreen.component.ts
+
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-cadastroscreen',
-  standalone: true,
-  imports: [],
   templateUrl: './cadastroscreen.component.html',
-  styleUrl: './cadastroscreen.component.css'
+  styleUrls: ['./cadastroscreen.component.css']
 })
-export class CadastroscreenComponent {
+export class CadastroScreenComponent {
+  servico = { nome: '', descricao: '', preco: null };
+  mensagemSucesso = '';
+  mensagemErro = '';
 
+  constructor(private http: HttpClient) {}
+
+  onSubmit(): void {
+    this.http.post('http://localhost:8000/api/servicos/', this.servico).subscribe(
+      response => {
+        this.mensagemSucesso = 'Serviço cadastrado com sucesso!';
+        this.servico = { nome: '', descricao: '', preco: null };
+        this.mensagemErro = '';
+      },
+      error => {
+        this.mensagemErro = 'Ocorreu um erro ao cadastrar o serviço. Tente novamente.';
+        this.mensagemSucesso = '';
+      }
+    );
+  }
 }

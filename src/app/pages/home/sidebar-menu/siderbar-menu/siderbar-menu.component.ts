@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHome, faUser, faCog, faBars, faRepeat, faReceipt, faShop, faCut  } from '@fortawesome/free-solid-svg-icons';
 
@@ -7,7 +8,7 @@ import { faHome, faUser, faCog, faBars, faRepeat, faReceipt, faShop, faCut  } fr
 @Component({
   selector: 'app-siderbar-menu',
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule],
+  imports: [FontAwesomeModule, CommonModule, RouterLink, RouterOutlet],
   templateUrl: './siderbar-menu.component.html',
   styleUrl: './siderbar-menu.component.css'
 })
