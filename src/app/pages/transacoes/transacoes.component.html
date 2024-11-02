@@ -4,9 +4,10 @@
   <app-siderbar-menu></app-siderbar-menu>
   <div class="container">
     <div class="button_container">
-      <button (click)="selectTab('tudo')" [class.active]="selectedTab === 'tudo'">Tudo</button>
-      <button (click)="selectTab('entrada')" [class.active]="selectedTab === 'entrada'">Entrada</button>
-      <button (click)="selectTab('saida')" [class.active]="selectedTab === 'saida'">Saída</button>
+      <button class="headerBtn" (click)="selectTab('tudo')" [class.active]="selectedTab === 'tudo'">Tudo</button>
+      <button class="headerBtn" (click)="selectTab('entrada')"
+        [class.active]="selectedTab === 'entrada'">Entrada</button>
+      <button class="headerBtn" (click)="selectTab('saida')" [class.active]="selectedTab === 'saida'">Saída</button>
     </div>
 
     <ul class="transacao_container">
@@ -23,32 +24,34 @@
         <p>{{ transacao.tipo }}</p>
       </li>
     </ul>
+
     <button (click)="openModal()" class="nova_transacao">Nova Transação</button>
+
     <div class="pagination">
       <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Anterior</button>
       <span>Página {{ currentPage }} de {{ totalPages }}</span>
       <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
     </div>
 
-    <div *ngIf="showModal" class="modal">
+    <button (click)="closeModal()" *ngIf="showModal" class="modal">
       <div class="modal-content">
         <h2>Adicionar Nova Transação</h2>
 
-        <label for="tipo">Tipo de Transação:</label>
+        <label class="transaction_title_input" for="tipo">Tipo de Transação:</label>
         <select id="tipo" [(ngModel)]="novaTransacao.tipo">
           <option value="entrada">Entrada</option>
           <option value="saida">Saída</option>
         </select>
 
-        <label for="metodoPagamento">Método de Pagamento:</label>
+        <label class="transaction_title_input" for="metodoPagamento">Método de Pagamento:</label>
         <select id="metodoPagamento" [(ngModel)]="novaTransacao.metodoPagamento">
           <option value="Dinheiro">Dinheiro</option>
           <option value="PIX">PIX</option>
           <option value="Cartão de Crédito">Cartão de Crédito</option>
         </select>
 
-        <label for="data">Data:</label>
-        <input type="date" id="data" [(ngModel)]="novaTransacao.data">
+        <label class="transaction_title_input" for="data">Data:</label>
+        <input class="calendario" type="date" id="data" [(ngModel)]="novaTransacao.data">
 
         <!-- Mostrar o campo de serviços apenas se o tipo for 'entrada' -->
         <div *ngIf="novaTransacao.tipo === 'entrada'">
@@ -81,6 +84,6 @@
         <button (click)="addTransacao()">Adicionar</button>
         <button (click)="closeModal()">Cancelar</button>
       </div>
-    </div>
+    </button>
   </div>
 </div>
