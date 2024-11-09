@@ -13,9 +13,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let realizado of servicosRealizados">
-          <td>{{ realizado.nome }}</td>
-          <td>{{ realizado.data }}</td>
-          <td>{{ realizado.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+          <td>{{ realizado.servico_nome }}</td>
+          <td>{{ realizado.data_pagamento }}</td>
+          <td>{{ realizado.valor_pago | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
         </tr>
       </tbody>
     </table>

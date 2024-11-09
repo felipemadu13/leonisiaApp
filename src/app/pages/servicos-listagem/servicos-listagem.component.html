@@ -14,7 +14,7 @@
           {{ servico.nome }}
         </div>
         <div class="servico-preco">
-          {{ servico.valor | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}
+          {{ servico.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}
         </div>
         <div class="servico-actions">
           <button (click)="deletarServico(servico.id)" class="btn btn-deletar">

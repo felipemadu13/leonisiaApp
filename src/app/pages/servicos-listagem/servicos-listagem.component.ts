@@ -30,6 +30,7 @@ export class ServicosListagemComponent implements OnInit {
     this.servicoService.getServicos().subscribe(data => {
       this.servicos = data;
     });
+    
   }
 
   deletarServico(id: number): void {

@@ -31,7 +31,7 @@ export class ServicosCadastroComponent implements OnInit {
     this.cadastroForm = this.fb.group({
       nome: ['', Validators.required],
       descricao: [''],
-      valor: [0, Validators.required]
+      preco: [0, Validators.required]
     });
   }
 
@@ -51,7 +51,7 @@ export class ServicosCadastroComponent implements OnInit {
         this.cadastroForm.patchValue({
           nome: servico.nome,
           descricao: servico.descricao,
-          valor: servico.valor
+          preco: servico.preco
         });
       },
       (error: any) => console.error('Erro ao carregar o serviço', error)

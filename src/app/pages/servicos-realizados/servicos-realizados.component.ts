@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe } from '@angular/common';
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';  // Importando DatePipe
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt'; 
 import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
@@ -10,28 +10,28 @@ registerLocaleData(localePt);
 @Component({
   selector: 'app-servicos-realizados',
   standalone: true,  
-  imports: [CurrencyPipe, CommonModule, SiderbarMenuComponent],
+  imports: [CurrencyPipe, DatePipe, CommonModule, SiderbarMenuComponent],  // Adicionando DatePipe aos imports
   templateUrl: './servicos-realizados.component.html',
   styleUrls: ['./servicos-realizados.component.css'],
   providers: [
     CurrencyPipe,
+    DatePipe,  // Adicionando DatePipe aos providers
     { provide: 'LOCALE_ID', useValue: 'pt-BR' },
   ]
 })
 export class ServicosRealizadosComponent implements OnInit {
   servicosRealizados: any[] = [];
 
-  constructor(private transacoesService: TransacoesService) { }
+  constructor(private transacoesService: TransacoesService, private datePipe: DatePipe) { }
 
   ngOnInit(): void {
     this.transacoesService.getTransactions().subscribe((data: any[]) => {
       // Filtrar as transações que possuem 'ServicosRealizados'
-      const servicos = data
-        .filter(transacao => transacao.ServicosRealizados)  // Filtra as transações com 'ServicosRealizados'
-        .map(transacao => transacao.ServicosRealizados)     // Extrai o array 'ServicosRealizados'
-        .flat();                                            // Achata os arrays em um único nível
-
-      this.servicosRealizados = servicos;
+      this.servicosRealizados = data.map(item => {
+        // Formatando a data usando o DatePipe
+        item.data_pagamento = this.datePipe.transform(item.data_pagamento, 'dd/MM/yyyy');
+        return item;
+      });
     });
   }
 }

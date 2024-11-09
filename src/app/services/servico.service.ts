@@ -8,7 +8,7 @@ import { Servico } from '../models/Servico';
   providedIn: 'root'
 })
 export class ServicoService {
-  private apiUrl = 'http://localhost:3000/servicos';
+  private apiUrl = 'http://localhost:8000/api/v1/servicos';
 
   constructor(private http: HttpClient) {}
 
@@ -19,20 +19,20 @@ export class ServicoService {
 
  
   getServicoById(id: number): Observable<Servico> {
-    return this.http.get<Servico>(`${this.apiUrl}/${id}`);
+    return this.http.get<Servico>(`${this.apiUrl}/${id}/`);
   }
 
 
   createServico(servico: Servico): Observable<Servico> {
-    return this.http.post<Servico>(this.apiUrl, servico);
+    return this.http.post<Servico>(this.apiUrl+'/', servico);
   }
 
 
   updateServico(id: number, servico: Servico): Observable<Servico> {
-    return this.http.put<Servico>(`${this.apiUrl}/${id}`, servico);
+    return this.http.put<Servico>(`${this.apiUrl}/${id}/`, servico);
   }
 
   deleteServico(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/${id}/`);
   }
 }
