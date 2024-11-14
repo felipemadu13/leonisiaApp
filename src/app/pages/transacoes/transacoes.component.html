@@ -1,13 +1,10 @@
-<!-- transacoes.component.html -->
-
 <div class="screen">
   <app-siderbar-menu></app-siderbar-menu>
   <div class="container">
     <div class="button_container">
-      <button class="headerBtn" (click)="selectTab('tudo')" [class.active]="selectedTab === 'tudo'">Tudo</button>
-      <button class="headerBtn" (click)="selectTab('entrada')"
-        [class.active]="selectedTab === 'entrada'">Entrada</button>
-      <button class="headerBtn" (click)="selectTab('saida')" [class.active]="selectedTab === 'saida'">Saída</button>
+      <button class="headerBtn" (click)="selectTab('tudo')" [ngClass]="{'selected-tab': selectedTab === 'tudo'}">Tudo</button>
+      <button class="headerBtn" (click)="selectTab('entrada')" [ngClass]="{'selected-tab': selectedTab === 'entrada'}">Entrada</button>
+      <button class="headerBtn" (click)="selectTab('saida')" [ngClass]="{'selected-tab': selectedTab === 'saida'}">Saída</button>
     </div>
 
     <ul class="transacao_container">
@@ -33,7 +30,7 @@
       <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Próxima</button>
     </div>
 
-    <button (click)="closeModal()" *ngIf="showModal" class="modal">
+    <button *ngIf="showModal" class="modal">
       <div class="modal-content">
         <h2>Adicionar Nova Transação</h2>
 

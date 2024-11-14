@@ -23,12 +23,11 @@ export class TransacoesComponent implements OnInit {
   servicos: Servico[] = [];
 
   selectedTab: string = 'tudo';
-  showModal: boolean = false;  // Controla a exibição do modal
+  showModal: boolean = false;  
 
-  // Dados para a nova transação
   novaTransacao: Transacoes = {
     tipo: 'entrada',
-    data: new Date(),  // Data como objeto Date
+    data: new Date(),
     metodoPagamento: '',
     valor: 0,
     servicosRealizados: [] 
@@ -41,7 +40,6 @@ export class TransacoesComponent implements OnInit {
     data: new Date()
   };
 
-  // Variáveis para a paginação
   pageSize: number = 5;
   currentPage: number = 1;
   totalPages: number = 1;
@@ -86,21 +84,18 @@ export class TransacoesComponent implements OnInit {
 
   selectTab(tab: string): void {
     this.selectedTab = tab;
-    this.currentPage = 1;  // Reseta para a primeira página ao mudar de aba
+    this.currentPage = 1;  
     this.filterTransactions();
   }
 
-  // Função para abrir o modal
   openModal(): void {
     this.showModal = true;
   }
 
-  // Função para fechar o modal
   closeModal(): void {
     this.showModal = false;
   }
 
-  // Função para adicionar uma nova transação
 addTransacao(): void {
   this.transacoesService.addTransaction(this.novaTransacao).subscribe(() => {
     this.transacoes.push(this.novaTransacao); // Atualiza localmente após o sucesso do POST

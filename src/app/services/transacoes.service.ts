@@ -7,7 +7,7 @@ import { Transacoes } from '../models/Transacoes';
   providedIn: 'root'
 })
 export class TransacoesService {
-  private apiUrl = 'http://localhost:8000/api/v1/pagamentos/';
+  private apiUrl = 'http://localhost:3000/transacoes';
   
   constructor(private http: HttpClient) {}
 
@@ -15,7 +15,6 @@ export class TransacoesService {
     return this.http.get<Transacoes[]>(this.apiUrl);
   }
 
-    // Método para adicionar uma nova transação
   addTransaction(transacao: Transacoes): Observable<Transacoes> {
     return this.http.post<Transacoes>(this.apiUrl, transacao);
   }
