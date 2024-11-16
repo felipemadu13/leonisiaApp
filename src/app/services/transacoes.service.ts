@@ -7,7 +7,7 @@ import { Transacoes } from '../models/Transacoes';
   providedIn: 'root'
 })
 export class TransacoesService {
-  private apiUrl = 'http://localhost:3000/transacoes';
+  private apiUrl = 'http://localhost:8000/transacoes';
   
   constructor(private http: HttpClient) {}
 
