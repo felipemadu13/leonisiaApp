@@ -27,6 +27,8 @@ export class ServicosRealizadosComponent implements OnInit {
    ngOnInit(): void {
     this.servicosRealizadosService.getServicos().subscribe(data => {
       this.servicosRealizados = data;
+      console.log(data)
+
     });
     
   }

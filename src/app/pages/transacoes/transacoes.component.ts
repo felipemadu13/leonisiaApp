@@ -38,6 +38,7 @@ export class TransacoesComponent implements OnInit {
     id: 0,
     nome: '',
     descricao: '',
+    data: new Date(),
     preco: 0,
   };
 
@@ -109,15 +110,13 @@ addTransacao(): void {
 addServico(): void {
   if (this.novaTransacao.servicosRealizados) {
     const novoServicoRealizado: ServicoRealizado2 = {
-      id: Date.now(),
-      data: new Date(),
       servico: {
         ...this.novoServico
       } 
     };
     this.novaTransacao.servicosRealizados.push(novoServicoRealizado);
   }
-  this.novoServico = { id: 0, nome: '', descricao: '', preco: 0 }; // Resetando o formulário
+  this.novoServico = { id: 0, nome: '', data: new Date() ,descricao: '', preco: 0 }; // Resetando o formulário
   this.updateValorTotal(); // Atualiza o valor total
 }
 
