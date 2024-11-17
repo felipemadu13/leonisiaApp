@@ -1,9 +1,9 @@
-import { ServicoRealizado } from "./ServicoRealizado";
+import { ServicoRealizado2 } from './ServicoRealizado2';
 
 export interface Transacoes {
   tipo: 'entrada' | 'saida';
   data: Date;
   metodoPagamento: string;
   valor: number;
-  servicosRealizados?: ServicoRealizado[];
+  servicosRealizados: ServicoRealizado2[];
 }
