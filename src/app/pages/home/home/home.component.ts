@@ -12,6 +12,8 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
+import { TransacoesService } from '../../../services/transacoes.service';
+import { Transacoes } from '../../../models/Transacoes';
 
 registerLocaleData(localePt);
 
@@ -117,7 +119,12 @@ export class HomeComponent {
   saida: string = 'diario';
   balanco: string = 'diario';
 
-  constructor(private dashboardService: DashboardService) { }
+  transacoes: Transacoes[] = [];
+
+
+
+
+  constructor(private dashboardService: DashboardService, private transacoesService: TransacoesService) { }
 
   ngOnInit(): void {
     this.dashboardService.getDashboard().subscribe(data => {
@@ -131,5 +138,26 @@ export class HomeComponent {
 
       this.chart?.update();
     });
+
+    this.transacoesService.getTransactions().subscribe((data) => {
+      this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
+    });
   }
+
+  getTotalTransacoes(): number {
+    console.log(this.transacoes);
+    return this.transacoes.reduce((total, transacao) => {
+      // Converte o valor para número, considerando vírgulas
+      const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+  
+      // Se a transação for do tipo "saida", torna o valor negativo
+      const valorAjustado = transacao.tipo === 'saida' ? -valor : valor;
+  
+      // Retorna o total acumulado, considerando se o valor é válido
+      return total + (isNaN(valorAjustado) ? 0 : valorAjustado);
+    }, 0);
+  }
+  
+  
+
 }

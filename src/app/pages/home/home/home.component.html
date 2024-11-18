@@ -4,7 +4,7 @@
         <div class="saldo-geral">
             <div class="saldo-data">
                 <span class="saldo-title">Saldo Geral</span>
-                <span class="saldo-value">{{ dashboard.saldoGeral | currency: 'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+                <span class="saldo-value">{{ getTotalTransacoes() | currency: 'BRL' }}</span>
             </div>
             <div id="barChart">
                 <canvas baseChart [data]="dashboard.BarChartData" [options]="barChartOptions">
@@ -65,6 +65,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="servi-realizados">
             <div class="space">
                 <span routerLink="/servicos-realizados" routerLinkActive="active" class="servicos-realizados-title">Serviços realizados em {{ currentDate | date: 'dd/MM/yyyy' }}</span>
@@ -74,5 +75,6 @@
                 </canvas>
             </div>
         </div>
+   
     </div>
 </div>
