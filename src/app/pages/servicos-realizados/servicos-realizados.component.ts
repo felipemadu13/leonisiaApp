@@ -4,6 +4,7 @@ import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt'; 
 import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
 import { ServicoRealizadoService } from '@services/servico-realizado.service';
+import { TransacoesService } from '@services/transacoes.service';
 
 registerLocaleData(localePt); 
 
@@ -21,8 +22,9 @@ registerLocaleData(localePt);
 })
 export class ServicosRealizadosComponent implements OnInit {
   servicosRealizados: any[] = [];
+  transacoes: any[] = [];
 
-  constructor(private servicosRealizadosService: ServicoRealizadoService, private datePipe: DatePipe) { }
+  constructor(private servicosRealizadosService: ServicoRealizadoService, private transacoesService: TransacoesService) { }
 
    ngOnInit(): void {
     this.servicosRealizadosService.getServicos().subscribe(data => {
@@ -30,6 +32,12 @@ export class ServicosRealizadosComponent implements OnInit {
       console.log(data)
 
     });
-    
+
+    this.transacoesService.getTransactions().subscribe((data) => {
+      this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
+      console.log(data)
+
+    });
+  
   }
 }

@@ -65,11 +65,11 @@
             <option *ngFor="let servico of servicos" [value]="servico.nome">{{ servico.nome }}</option>
           </select>
 
-          <label for="descricaoServico">Descrição:</label>
+          <!-- <label for="descricaoServico">Descrição:</label>
           <input type="text" id="descricaoServico" [(ngModel)]="novoServico.descricao">
 
           <label for="precoServico">Preço:</label>
-          <input type="number" id="precoServico" [(ngModel)]="novoServico.preco">
+          <input type="number" id="precoServico" [(ngModel)]="novoServico.preco"> -->
 
           <button (click)="addServico()">Adicionar Serviço</button>
         </div>

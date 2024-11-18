@@ -102,30 +102,31 @@ addTransacao(): void {
   this.transacoesService.addTransaction(this.novaTransacao).subscribe(() => {
     this.transacoes.push(this.novaTransacao); 
     this.filterTransactions(); 
+    console.log(this.novaTransacao)
     this.novaTransacao = { tipo: 'entrada', data: new Date(), metodoPagamento: '', valor: 0, servicosRealizados: [] };
     this.showModal = false;
   });
 }
 
 addServico(): void {
-  if (this.novaTransacao.servicosRealizados) {
-    const novoServicoRealizado: ServicoRealizado2 = {
-      servico: {
-        ...this.novoServico
-      } 
-    };
+  const servicoExistente = this.servicos.find(s => s.nome === this.novoServico.nome);
+  if (servicoExistente) {
+    const novoServicoRealizado: ServicoRealizado2 = { servico: { ...servicoExistente } };
     this.novaTransacao.servicosRealizados.push(novoServicoRealizado);
+  } else {
+    console.error('Serviço não encontrado!');
   }
-  this.novoServico = { id: 0, nome: '', data: new Date() ,descricao: '', preco: 0 }; // Resetando o formulário
-  this.updateValorTotal(); // Atualiza o valor total
+  this.updateValorTotal();
+  this.novoServico = { id: 0, nome: '', data: new Date(), descricao: '', preco: 0 };
 }
 
 
-  updateValorTotal(): void {
-    const total = this.novaTransacao.servicosRealizados
-      ?.reduce((acc, servicoRealizado) => acc + servicoRealizado.servico.preco, 0) ?? 0;
-    this.novaTransacao.valor = total;
-  }
+
+updateValorTotal(): void {
+  const total = this.novaTransacao.servicosRealizados
+    ?.reduce((acc, servicoRealizado) => acc + (+servicoRealizado.servico.preco || 0), 0) ?? 0; // Garantindo que 'preco' é numérico
+  this.novaTransacao.valor = total;
+}
 
 
 }
