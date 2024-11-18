@@ -3,7 +3,7 @@
   
   <div class="container mt-5">
     <h2 class="mb-4">Serviços Realizados</h2>
-    <table class="table table-striped">
+    <table class="table table-striped" *ngIf="servicosRealizados?.length; else noData">
       <thead>
         <tr>
           <th>Serviço</th>
@@ -13,11 +13,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let realizado of servicosRealizados">
-          <td>{{ realizado.id}}</td>
-          <td>{{ realizado.servico.data | date: 'dd/MM/yyyy' }}</td>
-          <td>{{ realizado.servico.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+          <ng-container *ngIf="realizado.servico">
+            <td>{{ realizado.id }}</td>
+            <td>{{ realizado.servico?.data | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ realizado.servico?.preco | currency: 'BRL':'symbol':'1.2-2':'pt-BR' }}</td>
+          </ng-container>
         </tr>
       </tbody>
     </table>
+    <ng-template #noData>
+      <p>Nenhum serviço realizado disponível.</p>
+    </ng-template>
   </div>
 </div>
