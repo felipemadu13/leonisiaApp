@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -24,35 +25,17 @@ export class AuthService {
       this.http.post(`${this.apiUrl}/login/`, loginData).subscribe(
         (response: any) => {
           if (response.token) {
-            this.setToken(response.token);
+            this.setToken(response.token); // Armazena o token
+            this.router.navigate(['/home']); // Redireciona após login bem-sucedido
             observer.next(response);
+            observer.complete();
           } else {
-            observer.error('Token não recebido');
+            observer.error('Login falhou: Token não recebido.');
           }
-          observer.complete();
         },
-        (error) => {
-          observer.error(error);
-          observer.complete();
-        }
+        (error) => observer.error(error)
       );
     });
-  }
-
-  /**
-   * Armazena o token no armazenamento local
-   * @param token Token JWT ou de autenticação
-   */
-  setToken(token: string): void {
-    localStorage.setItem(this.tokenKey, token);
-  }
-
-  /**
-   * Obtém o token armazenado
-   * @returns Token ou null se não estiver armazenado
-   */
-  getToken(): string | null {
-    return localStorage.getItem(this.tokenKey);
   }
 
   /**
@@ -61,7 +44,7 @@ export class AuthService {
    */
   isAuthenticated(): boolean {
     const token = this.getToken();
-    return !!token;
+    return !!token; // Retorna true se o token existir
   }
 
   /**
@@ -78,8 +61,27 @@ export class AuthService {
    */
   getHeaders(): HttpHeaders {
     const token = this.getToken();
+    if (!token) {
+      this.logout(); // Se o token não existir, desloga o usuário
+    }
     return new HttpHeaders({
       Authorization: `Token ${token}`,
     });
+  }
+
+  /**
+   * Obtém o token do armazenamento local
+   * @returns Token ou null
+   */
+  public getToken(): string | null {
+    return localStorage.getItem(this.tokenKey);
+  }
+
+  /**
+   * Armazena o token no armazenamento local
+   * @param token Token para armazenar
+   */
+  public setToken(token: string): void {
+    localStorage.setItem(this.tokenKey, token);
   }
 }
