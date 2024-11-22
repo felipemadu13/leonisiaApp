@@ -11,7 +11,7 @@
                 </canvas>
             </div>
         </div>
-        
+
         <div class="rendimentos">
             <div class="entrada-saida">
                 <div class="entrada">
@@ -23,10 +23,8 @@
                         </select>
                     </div>
                     <div class="value">
-                        <span *ngIf="entrada === 'diario'">{{ dashboard.entradaDiario | currency:
-                            'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
-                        <span *ngIf="entrada === 'mensal'">{{ dashboard.entradaMensal | currency:
-                            'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+                        <span *ngIf="entrada === 'diario'"><span class="saldo-value">{{ getEntradaDiarias() | currency: 'BRL' }}</span></span>
+                        <span *ngIf="entrada === 'mensal'"><span class="saldo-value">{{ getEntradaMensais() | currency: 'BRL' }}</span></span>
                     </div>
                 </div>
                 <div class="saida">
@@ -38,10 +36,8 @@
                         </select>
                     </div>
                     <div class="value">
-                        <span *ngIf="saida === 'diario'">{{ dashboard.saidaDiario | currency:
-                            'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
-                        <span *ngIf="saida === 'mensal'">{{ dashboard.saidaMensal | currency:
-                            'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+                        <span *ngIf="saida === 'diario'"><span class="saldo-value">{{ getSaidasDiarias() | currency: 'BRL' }}</span></span>
+                        <span *ngIf="saida === 'mensal'"><span class="saldo-value">{{ getSaidasMensais() | currency: 'BRL' }}</span></span>
                     </div>
                     
                 </div>
@@ -58,10 +54,8 @@
                 </div>
                 
                 <div class="value-balanco">
-                    <span *ngIf="balanco === 'diario'">{{ dashboard.balancoDiario | currency:
-                        'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
-                    <span *ngIf="balanco === 'mensal'">{{ dashboard.balancoMensal | currency:
-                        'BRL':'symbol':'1.2-2':'pt-BR'}}</span>
+                    <span *ngIf="balanco === 'diario'"><span class="saldo-value">{{ getBalançoDiario() | currency: 'BRL' }}</span></span>
+                    <span *ngIf="balanco === 'mensal'"><span class="saldo-value">{{ getBalançoMensal()| currency: 'BRL' }}</span></span>
                 </div>
             </div>
         </div>

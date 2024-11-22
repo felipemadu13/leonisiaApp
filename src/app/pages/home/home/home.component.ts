@@ -127,17 +127,17 @@ export class HomeComponent {
   constructor(private dashboardService: DashboardService, private transacoesService: TransacoesService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getDashboard().subscribe(data => {
-      this.dashboard = data;
+    // this.dashboardService.getDashboard().subscribe(data => {
+    //   this.dashboard = data;
 
-      this.barChartData.labels = data.BarChartData.labels;
-      this.barChartData.datasets = data.BarChartData.datasets;
+    //   this.barChartData.labels = data.BarChartData.labels;
+    //   this.barChartData.datasets = data.BarChartData.datasets;
 
-      this.pieChartData.labels = data.PieChartData.labels;
-      this.pieChartData.datasets = data.PieChartData.datasets;
+    //   this.pieChartData.labels = data.PieChartData.labels;
+    //   this.pieChartData.datasets = data.PieChartData.datasets;
 
-      this.chart?.update();
-    });
+    //   this.chart?.update();
+    // });
 
     this.transacoesService.getTransactions().subscribe((data) => {
       this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
@@ -158,6 +158,88 @@ export class HomeComponent {
     }, 0);
   }
   
+  getEntradaDiarias(): number {
+    const hoje = new Date();
+    const dataHoje = hoje.toISOString().split('T')[0]; // Pega a data de hoje no formato "AAAA-MM-DD"
   
+    // Filtra as transações do tipo 'saida' e do dia, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data).toISOString().split('T')[0];
+        return dataTransacao === dataHoje && transacao.tipo === 'entrada';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getEntradaMensais(): number {
+    const hoje = new Date();
+    const mesHoje = hoje.getMonth();  // Pega o mês atual (0-11)
+    const anoHoje = hoje.getFullYear();  // Pega o ano atual
+  
+    // Filtra as transações do tipo 'saida' e do mês atual, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data);
+        const mesTransacao = dataTransacao.getMonth();  // Mês da transação
+        const anoTransacao = dataTransacao.getFullYear();  // Ano da transação
+        return mesTransacao === mesHoje && anoTransacao === anoHoje && transacao.tipo === 'entrada';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getSaidasDiarias(): number {
+    const hoje = new Date();
+    const dataHoje = hoje.toISOString().split('T')[0]; // Pega a data de hoje no formato "AAAA-MM-DD"
+  
+    // Filtra as transações do tipo 'saida' e do dia, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data).toISOString().split('T')[0];
+        return dataTransacao === dataHoje && transacao.tipo === 'saida';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getSaidasMensais(): number {
+    const hoje = new Date();
+    const mesHoje = hoje.getMonth();  // Pega o mês atual (0-11)
+    const anoHoje = hoje.getFullYear();  // Pega o ano atual
+  
+    // Filtra as transações do tipo 'saida' e do mês atual, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data);
+        const mesTransacao = dataTransacao.getMonth();  // Mês da transação
+        const anoTransacao = dataTransacao.getFullYear();  // Ano da transação
+        return mesTransacao === mesHoje && anoTransacao === anoHoje && transacao.tipo === 'saida';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getBalançoDiario(): number {
+    const entradasDiarias = this.getEntradaDiarias();
+    const saidasDiarias = this.getSaidasDiarias();
+    return entradasDiarias - saidasDiarias; // Subtrai as saídas das entradas do dia
+  }
+  
+  getBalançoMensal(): number {
+    const entradasMensais = this.getEntradaMensais();
+    const saidasMensais = this.getSaidasMensais();
+    return entradasMensais - saidasMensais; // Subtrai as saídas das entradas do mês
+  }
+  
+
 
 }
