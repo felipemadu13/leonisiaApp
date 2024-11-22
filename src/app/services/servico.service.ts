@@ -8,7 +8,7 @@ import { Servico } from '../models/Servico';
   providedIn: 'root',
 })
 export class ServicoService {
-  private apiUrl = 'http://localhost:8000/api/servicos';
+  private apiUrl = 'http://localhost:8000/api/servicos/';
 
   constructor(private http: HttpClient, private authService: AuthService) {}
 
