@@ -26,7 +26,7 @@ h2 {
 
 .servico-item {
   display: flex;
-  justify-content: space-between; /* Mantém os itens distribuídos uniformemente */
+  justify-content: space-between; 
   align-items: center;
   background-color: #A0AE9E;
   padding: 10px 20px;
@@ -102,3 +102,4 @@ h2 {
 }
 
 /* servico-lista.component.css */
+

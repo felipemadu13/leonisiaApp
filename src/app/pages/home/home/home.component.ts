@@ -7,11 +7,14 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { DashboardService } from '../../../services/dashboard.service';
 import { Dashboard } from '../../../models/Dashboard';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
+import { TransacoesService } from '../../../services/transacoes.service';
+import { Transacoes } from '../../../models/Transacoes';
+import { ServicoRealizadoService } from '@services/servico-realizado.service';
+import { ServicoRealizado2 } from '../../../models/ServicoRealizado2';
 
 registerLocaleData(localePt);
 
@@ -20,7 +23,7 @@ Chart.register(DataLabelsPlugin);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe, RouterLink, RouterOutlet],
+  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, CurrencyPipe, RouterLink],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [
@@ -95,41 +98,199 @@ export class HomeComponent {
     },
   };
 
-  dashboard: Dashboard = {
-    saldoGeral: 0,
-    entradaDiario: 0,
-    entradaMensal: 0,
-    saidaDiario: 0,
-    saidaMensal: 0,
-    balancoDiario: 0,
-    balancoMensal: 0,
-    BarChartData: {
-      labels: [],
-      datasets: [{ data: [], label: '' }],
-    },
-    PieChartData: {
-      labels: [],
-      datasets: [{ data: [], label: '' }],
-    },
-  };
+
 
   entrada: string = 'diario';
   saida: string = 'diario';
   balanco: string = 'diario';
 
-  constructor(private dashboardService: DashboardService) { }
+  transacoes: Transacoes[] = [];
+  
+  servicosRealizados: ServicoRealizado2[] = [];
+
+
+
+
+  constructor(private transacoesService: TransacoesService, private servicosRealizadosService: ServicoRealizadoService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getDashboard().subscribe(data => {
-      this.dashboard = data;
 
-      this.barChartData.labels = data.BarChartData.labels;
-      this.barChartData.datasets = data.BarChartData.datasets;
-
-      this.pieChartData.labels = data.PieChartData.labels;
-      this.pieChartData.datasets = data.PieChartData.datasets;
-
-      this.chart?.update();
+    this.transacoesService.getTransactions().subscribe((data) => {
+      this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
+      this.atualizarGraficoBarra();
     });
+
+    this.carregarServicosRealizados();
+
   }
+
+carregarServicosRealizados(): void {
+  this.servicosRealizadosService.getServicos().subscribe((data) => {
+
+    const agrupados = new Map<string, number>();
+
+    data.forEach(servico => {
+      const nome = servico.servico?.nome || 'Desconhecido';
+      agrupados.set(nome, (agrupados.get(nome) || 0) + 1);
+    });
+
+    this.pieChartData.labels = Array.from(agrupados.keys()); 
+    this.pieChartData.datasets[0].data = Array.from(agrupados.values()); 
+
+    this.pieChartData.datasets[0].backgroundColor = this.obterCoresPadrao(this.pieChartData.labels.length);
+
+    this.chart?.update();
+  });
+}
+
+private obterCoresPadrao(total: number): string[] {
+  const chartJsColors = [
+    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#E7E9ED'
+  ]; 
+  const cores = [];
+  for (let i = 0; i < total; i++) {
+    cores.push(chartJsColors[i % chartJsColors.length]); 
+  }
+  return cores;
+}
+
+  getTotalTransacoes(): number {
+
+    return this.transacoes.reduce((total, transacao) => {
+  
+      const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+      const valorAjustado = transacao.tipo === 'saida' ? -valor : valor;
+      return total + (isNaN(valorAjustado) ? 0 : valorAjustado);
+    }, 0);
+  }
+  
+  getEntradaDiarias(): number {
+    const hoje = new Date();
+    const dataHoje = hoje.toISOString().split('T')[0]; // Pega a data de hoje no formato "AAAA-MM-DD"
+  
+    // Filtra as transações do tipo 'saida' e do dia, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data).toISOString().split('T')[0];
+        return dataTransacao === dataHoje && transacao.tipo === 'entrada';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getEntradaMensais(): number {
+    const hoje = new Date();
+    const mesHoje = hoje.getMonth();  // Pega o mês atual (0-11)
+    const anoHoje = hoje.getFullYear();  // Pega o ano atual
+  
+    // Filtra as transações do tipo 'saida' e do mês atual, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data);
+        const mesTransacao = dataTransacao.getMonth();  // Mês da transação
+        const anoTransacao = dataTransacao.getFullYear();  // Ano da transação
+        return mesTransacao === mesHoje && anoTransacao === anoHoje && transacao.tipo === 'entrada';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getSaidasDiarias(): number {
+    const hoje = new Date();
+    const dataHoje = hoje.toISOString().split('T')[0]; // Pega a data de hoje no formato "AAAA-MM-DD"
+  
+    // Filtra as transações do tipo 'saida' e do dia, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data).toISOString().split('T')[0];
+        return dataTransacao === dataHoje && transacao.tipo === 'saida';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getSaidasMensais(): number {
+    const hoje = new Date();
+    const mesHoje = hoje.getMonth();  // Pega o mês atual (0-11)
+    const anoHoje = hoje.getFullYear();  // Pega o ano atual
+  
+    // Filtra as transações do tipo 'saida' e do mês atual, e soma os valores
+    return this.transacoes
+      .filter(transacao => {
+        const dataTransacao = new Date(transacao.data);
+        const mesTransacao = dataTransacao.getMonth();  // Mês da transação
+        const anoTransacao = dataTransacao.getFullYear();  // Ano da transação
+        return mesTransacao === mesHoje && anoTransacao === anoHoje && transacao.tipo === 'saida';
+      })
+      .reduce((total, transacao) => {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        return total + (isNaN(valor) ? 0 : valor);
+      }, 0);
+  }
+  
+  getBalancoDiario(): number {
+    const entradasDiarias = this.getEntradaDiarias();
+    const saidasDiarias = this.getSaidasDiarias();
+    return entradasDiarias - saidasDiarias; // Subtrai as saídas das entradas do dia
+  }
+  
+  getBalancoMensal(): number {
+    const entradasMensais = this.getEntradaMensais();
+    const saidasMensais = this.getSaidasMensais();
+    return entradasMensais - saidasMensais; // Subtrai as saídas das entradas do mês
+  }
+
+getSomaTransacoesUltimosMeses(): { [mesAno: string]: number } {
+  const hoje = new Date();
+
+  
+  const meses = Array.from({ length: 6 }, (_, i) => {
+    const data = new Date(hoje);
+    data.setMonth(hoje.getMonth() - i); // Ajusta automaticamente para meses/anos anteriores
+    return `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}`;
+  }).reverse();
+
+  const somaPorMes: { [mesAno: string]: number } = {};
+
+  meses.forEach((mesAno) => {
+    somaPorMes[mesAno] = 0;
+  });
+  
+  
+  this.transacoes.forEach((transacao) => {
+    const dataTransacao = new Date(transacao.data);
+    const mesAnoTransacao = `${dataTransacao.getFullYear()}-${(dataTransacao.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}`;
+      
+      if (mesAnoTransacao in somaPorMes) {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        const valorAjustado = transacao.tipo === 'saida' ? -valor : valor;
+        
+        somaPorMes[mesAnoTransacao] += isNaN(valorAjustado) ? 0 : valorAjustado;
+      }
+    });
+    
+  return somaPorMes;
+}
+
+
+  atualizarGraficoBarra(): void {
+    const somas = this.getSomaTransacoesUltimosMeses();
+
+    this.barChartData.labels = Object.keys(somas); // Meses no eixo X
+    this.barChartData.datasets[0].data = Object.values(somas); // Valores no eixo Y
+    this.barChartData.datasets[0].label = 'Saldo Mensal';
+
+    this.chart?.update();
+  }
+  
+
+
 }

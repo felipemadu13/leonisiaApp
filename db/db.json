@@ -282,6 +282,94 @@
           "data": "2024-11-03T00:25:19.349Z"
         }
       ]
+    },
+    {
+      "id": "fc4e",
+      "tipo": "entrada",
+      "data": "2024-11-10T20:45:36.533Z",
+      "metodoPagamento": "",
+      "valor": 0,
+      "servicosRealizados": []
+    },
+    {
+      "id": "a500",
+      "tipo": "saida",
+      "data": "2024-11-12",
+      "metodoPagamento": "PIX",
+      "valor": 0,
+      "servicosRealizados": []
+    },
+    {
+      "id": "5a4a",
+      "tipo": "entrada",
+      "data": "2024-11-10T20:51:39.564Z",
+      "metodoPagamento": "",
+      "valor": 1300,
+      "servicosRealizados": [
+        {
+          "nome": "Corte Masculino",
+          "descricao": "Banana",
+          "valor": 1000,
+          "data": "2024-11-10T20:50:44.284Z"
+        },
+        {
+          "nome": "Corte Masculino",
+          "descricao": "teste",
+          "valor": 300,
+          "data": "2024-11-10T20:51:53.234Z"
+        }
+      ]
+    },
+    {
+      "id": "798f",
+      "tipo": "entrada",
+      "data": "2024-11-10",
+      "metodoPagamento": "Dinheiro",
+      "valor": 202,
+      "servicosRealizados": [
+        {
+          "nome": "Corte Masculino",
+          "descricao": "12121212",
+          "valor": 100,
+          "data": "2024-11-10T20:52:19.493Z"
+        },
+        {
+          "nome": "Corte Masculino",
+          "descricao": "aaaaaaaaaaa",
+          "valor": 102,
+          "data": "2024-11-10T20:52:50.986Z"
+        }
+      ]
+    },
+    {
+      "id": "65bc",
+      "tipo": "entrada",
+      "data": "2024-11-11",
+      "metodoPagamento": "Dinheiro",
+      "valor": 100,
+      "servicosRealizados": [
+        {
+          "nome": "Corte Masculino",
+          "descricao": "yhhh",
+          "valor": 100,
+          "data": "2024-11-10T20:53:00.530Z"
+        }
+      ]
+    },
+    {
+      "id": "d0bd",
+      "tipo": "entrada",
+      "data": "2024-11-14",
+      "metodoPagamento": "Dinheiro",
+      "valor": 58,
+      "servicosRealizados": [
+        {
+          "nome": "Corte Masculino",
+          "descricao": "bbbbbbbb",
+          "valor": 58,
+          "data": "2024-11-10T20:55:08.125Z"
+        }
+      ]
     }
   ],
   "servicos": [

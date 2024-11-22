@@ -7,6 +7,7 @@ import { ServicoService } from '@services/servico.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { ServicoRealizado2 } from '../../models/ServicoRealizado2';
 
 @Component({
   selector: 'app-transacoes',
@@ -23,25 +24,24 @@ export class TransacoesComponent implements OnInit {
   servicos: Servico[] = [];
 
   selectedTab: string = 'tudo';
-  showModal: boolean = false;  // Controla a exibição do modal
+  showModal: boolean = false;  
 
-  // Dados para a nova transação
   novaTransacao: Transacoes = {
     tipo: 'entrada',
-    data: new Date(),  // Data como objeto Date
+    data: new Date(),
     metodoPagamento: '',
     valor: 0,
-    servicosRealizados: [] 
+    servicosRealizados: []
   };
 
-    novoServico = {
+    novoServico: Servico = {
+    id: 0,
     nome: '',
     descricao: '',
-    valor: 0,
-    data: new Date()
+    data: new Date(),
+    preco: 0,
   };
 
-  // Variáveis para a paginação
   pageSize: number = 5;
   currentPage: number = 1;
   totalPages: number = 1;
@@ -86,42 +86,47 @@ export class TransacoesComponent implements OnInit {
 
   selectTab(tab: string): void {
     this.selectedTab = tab;
-    this.currentPage = 1;  // Reseta para a primeira página ao mudar de aba
+    this.currentPage = 1;  
     this.filterTransactions();
   }
 
-  // Função para abrir o modal
   openModal(): void {
     this.showModal = true;
   }
 
-  // Função para fechar o modal
   closeModal(): void {
     this.showModal = false;
   }
 
-  // Função para adicionar uma nova transação
 addTransacao(): void {
   this.transacoesService.addTransaction(this.novaTransacao).subscribe(() => {
-    this.transacoes.push(this.novaTransacao); // Atualiza localmente após o sucesso do POST
-    this.filterTransactions();  // Atualiza a lista
-    this.novaTransacao = { tipo: 'entrada', data: new Date(), metodoPagamento: '', valor: 0, servicosRealizados: [] };  // Reseta o formulário
-    this.closeModal();  // Fecha o modal
+    this.transacoes.push(this.novaTransacao); 
+    this.filterTransactions(); 
+    console.log(this.novaTransacao)
+    this.novaTransacao = { tipo: 'entrada', data: new Date(), metodoPagamento: '', valor: 0, servicosRealizados: [] };
+    this.showModal = false;
   });
 }
 
-    addServico(): void {
-    if (this.novaTransacao.servicosRealizados) {
-      this.novaTransacao.servicosRealizados.push({...this.novoServico});  // Adiciona o novo serviço
-    }
-    this.novoServico = { nome: '', descricao: '', valor: 0, data: new Date() };  // Reseta o formulário do serviço
-    this.updateValorTotal();  // Atualiza o valor total da transação
+addServico(): void {
+  const servicoExistente = this.servicos.find(s => s.nome === this.novoServico.nome);
+  if (servicoExistente) {
+    const novoServicoRealizado: ServicoRealizado2 = { servico: { ...servicoExistente } };
+    this.novaTransacao.servicosRealizados.push(novoServicoRealizado);
+  } else {
+    console.error('Serviço não encontrado!');
   }
+  this.updateValorTotal();
+  this.novoServico = { id: 0, nome: '', data: new Date(), descricao: '', preco: 0 };
+}
 
-    // Função para atualizar o valor total da transação baseado nos serviços realizados
-  updateValorTotal(): void {
-    const total = this.novaTransacao.servicosRealizados?.reduce((acc, servico) => acc + servico.valor, 0) ?? 0;
-    this.novaTransacao.valor = total;  // Atualiza o valor total
-  }
+
+
+updateValorTotal(): void {
+  const total = this.novaTransacao.servicosRealizados
+    ?.reduce((acc, servicoRealizado) => acc + (+servicoRealizado.servico.preco || 0), 0) ?? 0; // Garantindo que 'preco' é numérico
+  this.novaTransacao.valor = total;
+}
+
 
 }

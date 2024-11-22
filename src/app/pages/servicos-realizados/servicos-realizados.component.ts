@@ -1,37 +1,41 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';  // Importando DatePipe
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt'; 
 import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderbar-menu.component';
-import { TransacoesService } from '../../services/transacoes.service';
+import { ServicoRealizadoService } from '@services/servico-realizado.service';
+import { TransacoesService } from '@services/transacoes.service';
 
-registerLocaleData(localePt); 
+registerLocaleData(localePt);
 
 @Component({
   selector: 'app-servicos-realizados',
-  standalone: true,  
-  imports: [CurrencyPipe, DatePipe, CommonModule, SiderbarMenuComponent],  // Adicionando DatePipe aos imports
+  standalone: true,
+  imports: [CurrencyPipe, DatePipe, CommonModule, SiderbarMenuComponent],
   templateUrl: './servicos-realizados.component.html',
   styleUrls: ['./servicos-realizados.component.css'],
   providers: [
     CurrencyPipe,
-    DatePipe,  // Adicionando DatePipe aos providers
+    DatePipe,
     { provide: 'LOCALE_ID', useValue: 'pt-BR' },
   ]
 })
 export class ServicosRealizadosComponent implements OnInit {
   servicosRealizados: any[] = [];
+  transacoes: any[] = [];
 
-  constructor(private transacoesService: TransacoesService, private datePipe: DatePipe) { }
+  constructor(private servicosRealizadosService: ServicoRealizadoService) { }
 
   ngOnInit(): void {
-    this.transacoesService.getTransactions().subscribe((data: any[]) => {
-      // Filtrar as transações que possuem 'ServicosRealizados'
-      this.servicosRealizados = data.map(item => {
-        // Formatando a data usando o DatePipe
-        item.data_pagamento = this.datePipe.transform(item.data_pagamento, 'dd/MM/yyyy');
-        return item;
-      });
-    });
+    this.servicosRealizadosService.getServicosComTransacoes().subscribe(
+      (data) => {
+        this.servicosRealizados = data;
+      },
+      (error) => {
+        console.error('Erro ao carregar os serviços realizados', error);
+      }
+    );
   }
+
+
 }
