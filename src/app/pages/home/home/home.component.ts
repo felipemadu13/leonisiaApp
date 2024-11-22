@@ -7,15 +7,13 @@ import { CommonModule, CurrencyPipe } from '@angular/common';
 import { DashboardService } from '../../../services/dashboard.service';
 import { Dashboard } from '../../../models/Dashboard';
 import { FormsModule } from '@angular/forms';
-import { MatButton } from '@angular/material/button';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
 import { TransacoesService } from '../../../services/transacoes.service';
 import { Transacoes } from '../../../models/Transacoes';
 import { ServicoRealizadoService } from '@services/servico-realizado.service';
-// import { ServicoRealizado2 } from '@models/ServicoRealizado2';
 import { ServicoRealizado2 } from '../../../models/ServicoRealizado2';
 
 registerLocaleData(localePt);
@@ -141,28 +139,42 @@ export class HomeComponent {
 
   }
 
-  carregarServicosRealizados(): void {
-    this.servicosRealizadosService.getServicos().subscribe((data) => {
-  
-      this.pieChartData.labels = data.map(servico => servico.servico?.nome);
-      this.pieChartData.datasets[0].data = data.map(servico => servico.servico?.preco);
+carregarServicosRealizados(): void {
+  this.servicosRealizadosService.getServicos().subscribe((data) => {
 
-      this.chart?.update();
+    const agrupados = new Map<string, number>();
+
+    data.forEach(servico => {
+      const nome = servico.servico?.nome || 'Desconhecido';
+      agrupados.set(nome, (agrupados.get(nome) || 0) + 1);
     });
+
+    this.pieChartData.labels = Array.from(agrupados.keys()); 
+    this.pieChartData.datasets[0].data = Array.from(agrupados.values()); 
+
+    this.pieChartData.datasets[0].backgroundColor = this.obterCoresPadrao(this.pieChartData.labels.length);
+
+    this.chart?.update();
+  });
+}
+
+private obterCoresPadrao(total: number): string[] {
+  const chartJsColors = [
+    '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40', '#E7E9ED'
+  ]; 
+  const cores = [];
+  for (let i = 0; i < total; i++) {
+    cores.push(chartJsColors[i % chartJsColors.length]); 
   }
-
-
+  return cores;
+}
 
   getTotalTransacoes(): number {
 
     return this.transacoes.reduce((total, transacao) => {
-      // Converte o valor para número, considerando vírgulas
+  
       const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
-  
-      // Se a transação for do tipo "saida", torna o valor negativo
       const valorAjustado = transacao.tipo === 'saida' ? -valor : valor;
-  
-      // Retorna o total acumulado, considerando se o valor é válido
       return total + (isNaN(valorAjustado) ? 0 : valorAjustado);
     }, 0);
   }
