@@ -15,6 +15,10 @@ export class ServicoRealizadoService {
     return this.http.get<ServicoRealizado2[]>(this.apiUrl);
   }
 
+ getServicosComTransacoes(): Observable<any> {
+    return this.http.get<any>(this.apiUrl + '/servicos-realizados-transacoes/');
+  }
+
   getServicoById(id: number): Observable<ServicoRealizado2> {
     return this.http.get<ServicoRealizado2>(`${this.apiUrl}/${id}`);
   }

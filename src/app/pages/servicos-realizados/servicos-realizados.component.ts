@@ -6,11 +6,11 @@ import { SiderbarMenuComponent } from '../home/sidebar-menu/siderbar-menu/siderb
 import { ServicoRealizadoService } from '@services/servico-realizado.service';
 import { TransacoesService } from '@services/transacoes.service';
 
-registerLocaleData(localePt); 
+registerLocaleData(localePt);
 
 @Component({
   selector: 'app-servicos-realizados',
-  standalone: true,  
+  standalone: true,
   imports: [CurrencyPipe, DatePipe, CommonModule, SiderbarMenuComponent],
   templateUrl: './servicos-realizados.component.html',
   styleUrls: ['./servicos-realizados.component.css'],
@@ -24,20 +24,18 @@ export class ServicosRealizadosComponent implements OnInit {
   servicosRealizados: any[] = [];
   transacoes: any[] = [];
 
-  constructor(private servicosRealizadosService: ServicoRealizadoService, private transacoesService: TransacoesService) { }
+  constructor(private servicosRealizadosService: ServicoRealizadoService) { }
 
-   ngOnInit(): void {
-    this.servicosRealizadosService.getServicos().subscribe(data => {
-      this.servicosRealizados = data;
-      console.log(data)
-
-    });
-
-    this.transacoesService.getTransactions().subscribe((data) => {
-      this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
-      console.log(data)
-
-    });
-  
+  ngOnInit(): void {
+    this.servicosRealizadosService.getServicosComTransacoes().subscribe(
+      (data) => {
+        this.servicosRealizados = data;
+      },
+      (error) => {
+        console.error('Erro ao carregar os serviços realizados', error);
+      }
+    );
   }
+
+
 }

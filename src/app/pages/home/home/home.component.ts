@@ -14,6 +14,9 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LOCALE_ID } from '@angular/core';
 import { TransacoesService } from '../../../services/transacoes.service';
 import { Transacoes } from '../../../models/Transacoes';
+import { ServicoRealizadoService } from '@services/servico-realizado.service';
+// import { ServicoRealizado2 } from '@models/ServicoRealizado2';
+import { ServicoRealizado2 } from '../../../models/ServicoRealizado2';
 
 registerLocaleData(localePt);
 
@@ -22,7 +25,7 @@ Chart.register(DataLabelsPlugin);
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, MatButton, CurrencyPipe, RouterLink, RouterOutlet],
+  imports: [SiderbarMenuComponent, CommonModule, FormsModule, BaseChartDirective, CurrencyPipe, RouterLink],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [
@@ -120,32 +123,38 @@ export class HomeComponent {
   balanco: string = 'diario';
 
   transacoes: Transacoes[] = [];
+  
+  servicosRealizados: ServicoRealizado2[] = [];
 
 
 
 
-  constructor(private dashboardService: DashboardService, private transacoesService: TransacoesService) { }
+  constructor(private dashboardService: DashboardService, private transacoesService: TransacoesService, private servicosRealizadosService: ServicoRealizadoService) { }
 
   ngOnInit(): void {
-    // this.dashboardService.getDashboard().subscribe(data => {
-    //   this.dashboard = data;
-
-    //   this.barChartData.labels = data.BarChartData.labels;
-    //   this.barChartData.datasets = data.BarChartData.datasets;
-
-    //   this.pieChartData.labels = data.PieChartData.labels;
-    //   this.pieChartData.datasets = data.PieChartData.datasets;
-
-    //   this.chart?.update();
-    // });
 
     this.transacoesService.getTransactions().subscribe((data) => {
       this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
     });
+
+    this.carregarServicosRealizados();
+
   }
 
+  carregarServicosRealizados(): void {
+    this.servicosRealizadosService.getServicos().subscribe((data) => {
+  
+      this.pieChartData.labels = data.map(servico => servico.servico?.nome);
+      this.pieChartData.datasets[0].data = data.map(servico => servico.servico?.preco);
+
+      this.chart?.update();
+    });
+  }
+
+
+
   getTotalTransacoes(): number {
-    console.log(this.transacoes);
+
     return this.transacoes.reduce((total, transacao) => {
       // Converte o valor para número, considerando vírgulas
       const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
@@ -228,13 +237,13 @@ export class HomeComponent {
       }, 0);
   }
   
-  getBalançoDiario(): number {
+  getBalancoDiario(): number {
     const entradasDiarias = this.getEntradaDiarias();
     const saidasDiarias = this.getSaidasDiarias();
     return entradasDiarias - saidasDiarias; // Subtrai as saídas das entradas do dia
   }
   
-  getBalançoMensal(): number {
+  getBalancoMensal(): number {
     const entradasMensais = this.getEntradaMensais();
     const saidasMensais = this.getSaidasMensais();
     return entradasMensais - saidasMensais; // Subtrai as saídas das entradas do mês

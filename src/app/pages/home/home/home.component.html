@@ -54,15 +54,15 @@
                 </div>
                 
                 <div class="value-balanco">
-                    <span *ngIf="balanco === 'diario'"><span class="saldo-value">{{ getBalançoDiario() | currency: 'BRL' }}</span></span>
-                    <span *ngIf="balanco === 'mensal'"><span class="saldo-value">{{ getBalançoMensal()| currency: 'BRL' }}</span></span>
+                    <span *ngIf="balanco === 'diario'"><span class="saldo-value">{{ getBalancoDiario() | currency: 'BRL' }}</span></span>
+                    <span *ngIf="balanco === 'mensal'"><span class="saldo-value">{{ getBalancoMensal()| currency: 'BRL' }}</span></span>
                 </div>
             </div>
         </div>
         
         <div class="servi-realizados">
             <div class="space">
-                <span routerLink="/servicos-realizados" routerLinkActive="active" class="servicos-realizados-title">Serviços realizados em {{ currentDate | date: 'dd/MM/yyyy' }}</span>
+                <span routerLink="/servicos-realizados" routerLinkActive="active" class="servicos-realizados-title">Serviços realizados em {{ currentDate | date: 'dd/MM/yyyy': 'GMT+3' }}</span>
             </div>
             <div id="pieChart">
                 <canvas baseChart [data]="pieChartData" [type]="pieChartType" [options]="pieChartOptions">
