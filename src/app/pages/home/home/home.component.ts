@@ -98,23 +98,7 @@ export class HomeComponent {
     },
   };
 
-  dashboard: Dashboard = {
-    saldoGeral: 0,
-    entradaDiario: 0,
-    entradaMensal: 0,
-    saidaDiario: 0,
-    saidaMensal: 0,
-    balancoDiario: 0,
-    balancoMensal: 0,
-    BarChartData: {
-      labels: [],
-      datasets: [{ data: [], label: '' }],
-    },
-    PieChartData: {
-      labels: [],
-      datasets: [{ data: [], label: '' }],
-    },
-  };
+
 
   entrada: string = 'diario';
   saida: string = 'diario';
@@ -127,12 +111,13 @@ export class HomeComponent {
 
 
 
-  constructor(private dashboardService: DashboardService, private transacoesService: TransacoesService, private servicosRealizadosService: ServicoRealizadoService) { }
+  constructor(private transacoesService: TransacoesService, private servicosRealizadosService: ServicoRealizadoService) { }
 
   ngOnInit(): void {
 
     this.transacoesService.getTransactions().subscribe((data) => {
       this.transacoes = data.sort((a, b) => new Date(b.data).getTime() - new Date(a.data).getTime());
+      this.atualizarGraficoBarra();
     });
 
     this.carregarServicosRealizados();
@@ -259,6 +244,51 @@ private obterCoresPadrao(total: number): string[] {
     const entradasMensais = this.getEntradaMensais();
     const saidasMensais = this.getSaidasMensais();
     return entradasMensais - saidasMensais; // Subtrai as saídas das entradas do mês
+  }
+
+getSomaTransacoesUltimosMeses(): { [mesAno: string]: number } {
+  const hoje = new Date();
+
+  
+  const meses = Array.from({ length: 6 }, (_, i) => {
+    const data = new Date(hoje);
+    data.setMonth(hoje.getMonth() - i); // Ajusta automaticamente para meses/anos anteriores
+    return `${data.getFullYear()}-${(data.getMonth() + 1).toString().padStart(2, '0')}`;
+  }).reverse();
+
+  const somaPorMes: { [mesAno: string]: number } = {};
+
+  meses.forEach((mesAno) => {
+    somaPorMes[mesAno] = 0;
+  });
+  
+  
+  this.transacoes.forEach((transacao) => {
+    const dataTransacao = new Date(transacao.data);
+    const mesAnoTransacao = `${dataTransacao.getFullYear()}-${(dataTransacao.getMonth() + 1)
+      .toString()
+      .padStart(2, '0')}`;
+      
+      if (mesAnoTransacao in somaPorMes) {
+        const valor = parseFloat(transacao.valor.toString().replace(',', '.'));
+        const valorAjustado = transacao.tipo === 'saida' ? -valor : valor;
+        
+        somaPorMes[mesAnoTransacao] += isNaN(valorAjustado) ? 0 : valorAjustado;
+      }
+    });
+    
+  return somaPorMes;
+}
+
+
+  atualizarGraficoBarra(): void {
+    const somas = this.getSomaTransacoesUltimosMeses();
+
+    this.barChartData.labels = Object.keys(somas); // Meses no eixo X
+    this.barChartData.datasets[0].data = Object.values(somas); // Valores no eixo Y
+    this.barChartData.datasets[0].label = 'Saldo Mensal';
+
+    this.chart?.update();
   }
   
 

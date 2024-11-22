@@ -7,7 +7,7 @@
                 <span class="saldo-value">{{ getTotalTransacoes() | currency: 'BRL' }}</span>
             </div>
             <div id="barChart">
-                <canvas baseChart [data]="dashboard.BarChartData" [options]="barChartOptions">
+                <canvas baseChart [data]="barChartData" [options]="barChartOptions">
                 </canvas>
             </div>
         </div>
