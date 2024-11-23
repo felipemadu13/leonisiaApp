@@ -1,19 +1,25 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Dashboard } from '../models/Dashboard';
-
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DashboardService {
-  private apiUrl = 'http://localhost:8000/dashboard';
+  private apiUrl = 'http://localhost:8000/dashboard/'; // URL do endpoint do backend
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
+  /**
+   * Obtém os dados do Dashboard.
+   * @returns Um Observable contendo os dados do Dashboard.
+   */
   getDashboard(): Observable<Dashboard> {
-    return this.http.get<Dashboard>(this.apiUrl);
+    const headers = new HttpHeaders({
+      Authorization: `Token ${this.authService.getToken()}` // Insere o token no cabeçalho
+    });
+    return this.http.get<Dashboard>(this.apiUrl, { headers }); // Requisição GET ao backend
   }
-
 }
