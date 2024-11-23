@@ -19,7 +19,7 @@ export class ServicoService {
 
   getServicoById(id: number): Observable<Servico> {
     const headers = this.authService.getHeaders();
-    return this.http.get<Servico>(`${this.apiUrl}/${id}`, { headers });
+    return this.http.get<Servico>(`${this.apiUrl}${id}/`, { headers });
   }
 
   createServico(servico: Servico): Observable<Servico> {
@@ -29,11 +29,11 @@ export class ServicoService {
 
   updateServico(id: number, servico: Servico): Observable<Servico> {
     const headers = this.authService.getHeaders();
-    return this.http.put<Servico>(`${this.apiUrl}/${id}`, servico, { headers });
+    return this.http.put<Servico>(`${this.apiUrl}${id}/`, servico, { headers });
   }
 
   deleteServico(id: number): Observable<void> {
     const headers = this.authService.getHeaders(); // Garantir que o cabeçalho é incluído
-    return this.http.delete<void>(`${this.apiUrl}/${id}`, { headers });
+    return this.http.delete<void>(`${this.apiUrl}${id}/`, { headers });
   }
 }
