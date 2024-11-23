@@ -15,7 +15,7 @@
         <strong>Tipo</strong>
       </div>
       <li *ngFor="let transacao of paginatedTransacoes" class="transacao_data">
-        <p>{{ transacao.data | date:'dd/MM/yyyy' }}</p>
+        <p>{{ transacao.data | date:'dd/MM/yyyy' : 'GMT+3'}}</p>
         <p> {{ transacao.metodoPagamento }}</p>
         <p>{{ transacao.valor | currency:'BRL' }}</p>
         <p>{{ transacao.tipo }}</p>
