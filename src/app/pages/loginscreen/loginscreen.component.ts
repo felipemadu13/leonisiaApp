@@ -1,28 +1,36 @@
 import { Component } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';  // Importa FormsModule
 import { Router } from '@angular/router';
+import { AuthService } from '@services/auth.service';
+
 @Component({
   selector: 'app-loginscreen',
-  standalone: true,
-  imports: [],
   templateUrl: './loginscreen.component.html',
-  styleUrl: './loginscreen.component.css'
+  styleUrls: ['./loginscreen.component.css'],
+  standalone: true,  // Declara como componente standalone
+  imports: [FormsModule]  // Adiciona FormsModule aqui
 })
-
-
 export class LoginscreenComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private router: Router) { }
-  alerta() {
-    this.alerta = () => {
-      alert("clicou")
-    }
-  }
+  constructor(private authService: AuthService, private router: Router) {}
+
   goToHome() {
-    this.goToHome = () => {
-      this.router.navigate(['/home'])
-    }
+    this.authService.login(this.email, this.password).subscribe(
+      (response: any) => {
+        console.log('Login bem-sucedido:', response);  // Log para depuração
+        if (response.token) {
+          this.authService.setToken(response.token); // Armazena o token recebido
+          this.router.navigate(['/home']); // Redireciona para a página inicial
+        } else {
+          alert('Erro: Token não recebido.');
+        }
+      },
+      (error: any) => {
+        console.error('Erro ao fazer login:', error);
+        alert('Erro ao fazer login: ' + (error.error?.error || 'Verifique suas credenciais'));
+      }
+    );
   }
 }
